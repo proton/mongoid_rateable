@@ -1,4 +1,4 @@
-class Rating
+class RatingMark
 	include Mongoid::Document
 #	belongs_to :rater, polymorphic: true
 	embedded_in :rateable, polymorphic: true
