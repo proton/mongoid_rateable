@@ -1,9 +1,61 @@
-= mongoid_rateable
+= Mongoid::Rateable
 
-Description goes here.
+Adding simple rating functionality for Mongoid models
 
-== Contributing to mongoid_rateable
- 
+== Installation
+
+Add to Gemfile:
+
+    gem 'mongoid_rateable'
+
+== Getting Started
+
+Include the module in models where you want it:
+
+    class Post
+      include Mongoid::Document
+      include Mongoid::Rateable
+      ...
+    end
+
+    class User
+      include Mongoid::Document
+      include Mongoid::Rater
+      ...
+    end
+
+== Cast Rates
+
+You can rate by passing an integer and a rater model to the "rate" method:
+
+    @post = Post.first
+    @user = User.where(:name => 'Bill') # or more likely, current_user
+
+    @post.rate 1, @user     # I like this!
+    @post.rate -1, @user    # I don't like this!
+    @post.rate 5, @user     # I LOVE this!
+    @post.rate -10, @user   # Delete it from the Internet!
+
+You can unrate by using "unrate" method:
+
+    @post.unrate @user
+
+== Additional Functionality
+
+You'll often want to know if a user can rate.  Simple:
+
+    @post.rated? @user      # True if they've rated
+
+You can also get a tally of the number of votes cast:
+
+    @post.rate_count        # Just one so far!
+
+You can get the average rating:
+
+    @post.rating      # rates / raters.count
+
+== Contributing to Mongoid::Rateable
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
@@ -16,4 +68,3 @@ Description goes here.
 
 Copyright (c) 2011 Peter Savichev (proton). See LICENSE.txt for
 further details.
-
