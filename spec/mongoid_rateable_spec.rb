@@ -83,6 +83,7 @@ describe Mongoid::Rateable do
     it "should properly update the collection" do
       @post.rate 8, @bob
       @post.rate -10, @sally
+      @post.save
       post = Post.where(:name => "Announcement").first
       post.rates.should == -2
       post.rated?(@bob).should == true
