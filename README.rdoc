@@ -40,6 +40,10 @@ You can unrate by using "unrate" method:
 
     @post.unrate @user
 
+And don't forget to save rateable object:
+
+    @post.save
+
 == Additional Functionality
 
 You'll often want to know if a user can rate.  Simple:
@@ -53,10 +57,6 @@ You can also get a tally of the number of votes cast:
 You can get the average rating:
 
     @post.rating      # rates / raters.count
-
-And don't forget to save rateable object:
-
-    @post.save
 
 == Contributing to Mongoid::Rateable
 
