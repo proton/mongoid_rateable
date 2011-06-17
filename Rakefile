@@ -3,7 +3,6 @@
 require 'rubygems'
 require 'rake'
 require 'bundler'
-require 'mongoid'
 
 begin
   Bundler.setup(:default, :development)

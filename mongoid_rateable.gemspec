@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/mongoid_rateable/rateable.rb",
     "lib/mongoid_rateable/rater.rb",
     "lib/mongoid_rateable/rating.rb",
+    "mongoid_rateable.gemspec",
     "spec/models/post.rb",
     "spec/models/user.rb",
     "spec/mongoid_rateable_spec.rb",
@@ -45,6 +46,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<mongoid_rateable>, [">= 0"])
+      s.add_runtime_dependency(%q<mongoid>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
@@ -55,8 +57,15 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<shoulda>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
     else
       s.add_dependency(%q<mongoid_rateable>, [">= 0"])
+      s.add_dependency(%q<mongoid>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
@@ -67,13 +76,26 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 2.0.0"])
       s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<shoulda>, [">= 0"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
     end
   else
     s.add_dependency(%q<mongoid_rateable>, [">= 0"])
+    s.add_dependency(%q<mongoid>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
     s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<shoulda>, [">= 0"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 2.0.0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
