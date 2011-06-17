@@ -2,3 +2,4 @@ add method most_voted(count) to Rateable
 store average on db
 add methods rate(rateable) and unrate(rateable) to Rater
 add indexes to fields
+store :rater_class => rater.class.to_s in Mark
