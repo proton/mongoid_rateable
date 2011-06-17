@@ -3,7 +3,7 @@ module Mongoid
 		extend ActiveSupport::Concern
 
 		included do
-#			has_many :marks, as: :rater
+			has_many :rating_marks, as: :rater
 		end
 
 		module InstanceMethods

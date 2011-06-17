@@ -6,7 +6,7 @@ describe Mongoid::Rateable do
 
     it "adds fields to the rateable document" do
       fields = Post.fields
-      fields['points'].should_not == nil
+      fields['rates'].should_not == nil
     end
 
     it "defines methods in rateable document" do
@@ -30,19 +30,26 @@ describe Mongoid::Rateable do
     it "tracks rates" do
       @post.rate 1, @bob
       @post.rate 1, @sally
-      @post.points.should == 2
+      @post.rates.should == 2
     end
 
     it "limits rates by user" do
       @post.rate 1, @bob
       @post.rate 5, @bob
-      @post.points.should == 5
+      @post.rates.should == 5
+    end
+
+    it "can be unrated" do
+      @post.rate 1, @bob
+      @post.unrate @bob
+      @post.rate_count.should == 0
+      @post.rates.should == 0
     end
 
     it "works with both positive and negative rates" do
       @post.rate 5, @bob
       @post.rate -3, @sally
-      @post.points.should == 2
+      @post.rates.should == 2
     end
 
     it "should know if someone has rated" do
@@ -77,7 +84,7 @@ describe Mongoid::Rateable do
       @post.rate 8, @bob
       @post.rate -10, @sally
       post = Post.where(:name => "Announcement").first
-      post.points.should == -2
+      post.rates.should == -2
       post.rated?(@bob).should == true
       post.rated?(@sally).should == true
       post.rate_count.should == 2
