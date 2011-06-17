@@ -54,6 +54,10 @@ You can get the average rating:
 
     @post.rating      # rates / raters.count
 
+And don't forget to save rateable object:
+
+    @post.save
+
 == Contributing to Mongoid::Rateable
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
