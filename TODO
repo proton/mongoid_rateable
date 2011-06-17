@@ -1,5 +1,5 @@
-add method most_voted(count) to Rateable
-store average on db
+add method/scope most_voted(count), rated_between(,) to Rateable
+add min/max rating
 add methods rate(rateable) and unrate(rateable) to Rater
 add indexes to fields
-store :rater_class => rater.class.to_s in Mark
+improve speed
