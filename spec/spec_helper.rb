@@ -16,7 +16,7 @@ Mongoid.logger = Logger.new($stdout)
 
 DatabaseCleaner.orm = "mongoid"
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   config.before(:all) do
     DatabaseCleaner.strategy = :truncation
   end
