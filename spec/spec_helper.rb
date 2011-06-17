@@ -6,10 +6,12 @@ MODELS = File.join(File.dirname(__FILE__), "models")
 require "rubygems"
 require "mongoid"
 require "mongoid_rateable"
-require "rspec"
 require "database_cleaner"
+require "simplecov"
 
-Dir["#{File.dirname(__FILE__)}/models/*.rb"].each { |f| require f }
+SimpleCov.start
+
+Dir["#{MODELS}/*.rb"].each { |f| require f }
 
 Mongoid.config.master = Mongo::Connection.new.db("mongoid_rateable_test")
 Mongoid.logger = Logger.new($stdout)
