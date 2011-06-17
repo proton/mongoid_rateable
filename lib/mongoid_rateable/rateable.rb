@@ -31,12 +31,12 @@ module Mongoid
 				if self.rating_marks.blank?
 					nil
 				else
-					self.rates.to_f / self.rating_marks.count
+					self.rates.to_f / self.rating_marks.size
 				end
 			end
 
 			def rate_count
-				self.rating_marks.count
+				self.rating_marks.size
 			end
 
 		end
