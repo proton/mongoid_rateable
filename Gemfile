@@ -4,6 +4,7 @@ gemspec
 
 # Add dependencies required to use your gem here.
 
+gem "bson_ext"
 gem "mongoid"
 
 # Add dependencies to develop your gem here.
