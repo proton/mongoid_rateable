@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mongoid_rateable (0.0.3)
+    mongoid_rateable (0.0.4)
       bson_ext
       mongoid
       mongoid_rateable
