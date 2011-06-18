@@ -4,7 +4,7 @@ module Mongoid
 
 		included do
 			field :rates, :type => Integer, :default => 0
-			embeds_many :rating_marks, as: :rateable
+			embeds_many :rating_marks, :as => :rateable
 		end
 
 		module InstanceMethods
