@@ -23,6 +23,16 @@ module Mongoid
 				end
 			end
 
+			def rate_and_save(mark, rater)
+				rate(mark, rater)
+				save
+			end
+
+			def unrate_and_save(rater)
+				unrate(rater)
+				save
+			end
+
 			def rated?(rater)
 				self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
 			end

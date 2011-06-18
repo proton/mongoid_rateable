@@ -25,8 +25,10 @@ describe Post do
   
   subject { @post }
   it { should respond_to :rate }
-  it { should respond_to :rated? }
   it { should respond_to :unrate }
+  it { should respond_to :rate_and_save }
+  it { should respond_to :unrate_and_save }
+  it { should respond_to :rated? }
   it { should respond_to :rate_count }
   it { should respond_to :rates }
   it { should respond_to :rating }

@@ -43,6 +43,11 @@ And don't forget to save rateable object:
 
     @post.save
 
+Sure, you can rate and save in one fuction:
+
+    @post.rate_and_save(3, @user)
+    @post.unrate_and_save(@user)
+
 == Additional Functionality
 
 You'll often want to know if a user can rate.  Simple:
