@@ -20,7 +20,6 @@ Include the module in models where you want it:
 
     class User
       include Mongoid::Document
-      include Mongoid::Rater
       ...
     end
 
