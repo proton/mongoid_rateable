@@ -1,14 +1,5 @@
 require "spec_helper"
 
-RSpec::Matchers.define :have_module do |expected|
-  match do |actual|
-    actual == expected
-  end
-  
-  diffable
-end
-
-
 describe Post do
   
   before(:each) do
