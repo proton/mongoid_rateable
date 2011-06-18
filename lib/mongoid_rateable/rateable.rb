@@ -23,7 +23,7 @@ module Mongoid
 			end
 
 			def unrate(rater)
-				mark = self.rating_marks.where(:rater_id => rater.id).first
+				mark = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
 				if mark
 					self.rates -= mark.mark.to_i
 					mark.delete
