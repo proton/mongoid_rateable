@@ -5,6 +5,13 @@ module Mongoid
 		included do
 			field :rates, :type => Integer, :default => 0
 			embeds_many :rating_marks, :as => :rateable
+			index(
+				[
+					["rating_marks.rater_id"],
+					["rating_marks.rater_class"]
+				],
+				unique: true
+			)
 		end
 
 		module InstanceMethods
