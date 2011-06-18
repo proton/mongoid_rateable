@@ -2,3 +2,4 @@ add method/scope most_voted(count), rated_between(,) to Rateable
 add min/max rating
 add indexes to fields (http://www.mongodb.org/display/DOCS/Indexes#Indexes-EmbeddedKeys)
 improve speed (http://cookbook.mongodb.org/patterns/votes/)
+store version in code (https://github.com/technicalpickles/jeweler)
