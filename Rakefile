@@ -43,3 +43,19 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+desc "Release gem"
+task :release => :build do
+	version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
+	puts "Commiting #{version}"
+	system "git commit -a -m 'Version bump to #{version}'"
+  puts "Tagging #{version}"
+  system "git tag -a #{version} -m 'Tagging #{version}'"
+	puts "Pushing…"
+  system "git push"
+  system "git push --tags"
+  puts "Releasing to Gemcutter"
+  system "gem push mongoid_rateable-#{version}.gem"
+end
+
