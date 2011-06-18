@@ -46,7 +46,7 @@ describe Post do
     end   
   end
   
-  describe "when rated" do
+  context "when rated" do
     before (:each) { @post.rate 1, @bob }
     
     describe "#rate" do
@@ -95,14 +95,13 @@ describe Post do
     
     describe "#unrate" do
       before { @post.unrate @bob } 
-      
-      # TODO: Write some non-cryptic messages
-      describe "#rate_count" do
-        specify { @post.rate_count.should eql 0 } 
+
+			it "should have null #rate_count" do
+        @post.rate_count.should eql 0
       end
       
-      describe "#rates" do
-        specify { @post.rates.should eql 0 }
+			it "should have null #rates" do
+        @post.rates.should eql 0
       end
     end
     
@@ -126,7 +125,7 @@ describe Post do
     end
   end
   
-  describe "when not rated" do
+  context "when not rated" do
     describe "#rates" do
       specify { @post.rates.should eql 0 }
     end
@@ -134,9 +133,21 @@ describe Post do
     describe "#rating" do
       specify { @post.rating.should be_nil }
     end
+
+    describe "#unrate" do
+      before { @post.unrate @sally }
+
+			it "should have null #rate_count" do
+        @post.rate_count.should eql 0
+      end
+
+			it "should have null #rates" do
+        @post.rates.should eql 0
+      end
+    end
   end
  
-  describe "when saving the collection" do
+  context "when saving the collection" do
     before (:each) do
       @post.rate 8, @bob
       @post.rate -10, @sally
@@ -170,5 +181,67 @@ describe Post do
       specify { @finded_post.rating.should eql -1.0 }
     end
   end
-  
+
+  describe "#rate_and_save" do
+    before (:each) do
+      @post.rate_and_save 8, @bob
+      @post.rate_and_save -10, @sally
+      @finded_post = Post.where(:name => "Announcement").first
+    end
+
+    describe "#rated?" do
+			it "should be #rated? by Bob" do
+				@finded_post.rated?(@bob).should be_true
+			end
+
+			it "should be #rated? by Sally" do
+				@finded_post.rated?(@sally).should be_true
+			end
+
+			it "should be not #rated? by Alice" do
+				@finded_post.rated?(@alice).should be_false
+			end
+    end
+
+    it "should have #rates equal -2" do
+			@finded_post.rates.should eql -2
+    end
+
+    it "should have #rate_count equal 2" do
+			@finded_post.rate_count.should eql 2
+    end
+
+    it "should have #rating equal -1.0" do
+			@finded_post.rating.should eql -1.0
+    end
+
+    describe "#unrate_and_save" do
+			before (:each) do
+				@post.unrate_and_save @sally
+				@finded_post = Post.where(:name => "Announcement").first
+			end
+
+			describe "#rated?" do
+				it "should be #rated? by Bob" do
+					@finded_post.rated?(@bob).should be_true
+				end
+
+				it "should be not #rated? by Sally" do
+					@finded_post.rated?(@sally).should be_false
+				end
+			end
+
+			it "should have #rates equal 8" do
+				@finded_post.rates.should eql 8
+			end
+
+			it "should have #rate_count equal 1" do
+				@finded_post.rate_count.should eql 1
+			end
+
+			it "should have #rating equal 8.0" do
+				@finded_post.rating.should eql 8.0
+			end
+    end
+  end
 end
