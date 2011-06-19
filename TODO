@@ -1,3 +1,4 @@
 add method/scope most_voted(count), rated_between(,) to Rateable
 add min/max rating
 improve speed (http://cookbook.mongodb.org/patterns/votes/)
+fix multiply developer dependencies
