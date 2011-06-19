@@ -2,4 +2,3 @@ add method/scope most_voted(count), rated_between(,) to Rateable
 add min/max rating
 store rate_count and average_rate as fields (need migration to migrate from other versions)
 improve speed (http://cookbook.mongodb.org/patterns/votes/)
-fix multiply developer dependencies
