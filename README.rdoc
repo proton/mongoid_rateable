@@ -50,9 +50,13 @@ Sure, you can rate and save in one fuction:
 
 == Additional Functionality
 
-You'll often want to know if a user can rate.  Simple:
+You'll often want to know if a user already rated post.  Simple:
 
-    @post.rated? @user      # True if they've rated
+    @post.rated? @user      # True if it rated by user
+
+And if someone rated it:
+
+    @post.rated?      # True if it rated by anyone
 
 You can also get a tally of the number of votes cast:
 
