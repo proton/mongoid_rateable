@@ -40,8 +40,12 @@ module Mongoid
 				save
 			end
 
-			def rated?(rater)
-				self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
+			def rated?(rater = nil)
+				if rater
+					self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
+				else
+					!self.rating_marks.empty?
+				end
 			end
 
 			def rating
