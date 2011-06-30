@@ -56,7 +56,7 @@ You'll often want to know if a user already rated post.  Simple:
 
 And if someone rated it:
 
-    @post.rated?            # True if it rated by anyone
+    @post.rated?            # True if it rated by someone
 
 You can also get a tally of the number of votes cast:
 
