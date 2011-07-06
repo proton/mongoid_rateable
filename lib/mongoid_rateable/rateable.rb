@@ -4,7 +4,11 @@ module Mongoid
 
 		included do
 			field :rates, :type => Integer, :default => 0
+			field :rating, :type => Float, :default => nil
+			field :rate_count, :type => Integer, :default => 0
+
 			embeds_many :rating_marks, :as => :rateable
+
 			index(
 				[
 					["rating_marks.rater_id"],
@@ -17,17 +21,15 @@ module Mongoid
 		module InstanceMethods
 
 			def rate(mark, rater)
-				unrate(rater)
+				unrate_without_rating_update(rater)
 				self.rates += mark.to_i
 				self.rating_marks.new(:rater_id => rater.id, :mark => mark, :rater_class => rater.class.to_s)
+				update_rating
 			end
 
 			def unrate(rater)
-				mark = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
-				if mark
-					self.rates -= mark.mark.to_i
-					mark.delete
-				end
+				unrate_without_rating_update(rater)
+				update_rating
 			end
 
 			def rate_and_save(mark, rater)
@@ -44,20 +46,37 @@ module Mongoid
 				if rater
 					self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
 				else
-					!self.rating_marks.empty?
+					rate_count!=0
 				end
 			end
 
 			def rating
-				if self.rating_marks.blank?
-					nil
-				else
-					self.rates.to_f / self.rating_marks.size
-				end
+				read_attribute(:rating) || calculate_and_store_rating
 			end
 
 			def rate_count
-				self.rating_marks.size
+				rating_marks.size
+			end
+
+			private
+
+			def unrate_without_rating_update(rater)
+				rmark = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
+				if rmark
+					self.rates -= rmark.mark.to_i
+					rmark.delete
+				end
+			end
+
+			def update_rating
+ 				rt = (self.rates.to_f / self.rating_marks.size) unless self.rating_marks.blank?
+ 				write_attribute(:rating, rt)
+			end
+
+			def calculate_and_store_rating
+				puts "Deprecated"
+				update_rating
+				read_attribute(:rating)
 			end
 
 		end

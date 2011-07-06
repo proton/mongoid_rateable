@@ -117,7 +117,7 @@ describe Post do
         @post.rating.should eql 2.5
       end
 
-      it "should average if the result is zero" do
+      it "should calculate the average rate if the result is zero" do
         @post.rate -1, @sally
         @post.rating.should eql 0.0
       end
