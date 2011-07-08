@@ -154,7 +154,7 @@ describe Post do
       @finded_post = Post.where(:name => "Announcement").first
     end
 
-    describe "#rated?" do
+    describe "#rated_by?" do
       describe "for Bob" do
         specify { @finded_post.rated_by?(@bob).should be_true }
       end
@@ -190,15 +190,15 @@ describe Post do
 
     describe "#rated?" do
 			it "should be #rated? by Bob" do
-				@finded_post.rated?(@bob).should be_true
+				@finded_post.rated_by?(@bob).should be_true
 			end
 
 			it "should be #rated? by Sally" do
-				@finded_post.rated?(@sally).should be_true
+				@finded_post.rated_by?(@sally).should be_true
 			end
 
 			it "should be not #rated? by Alice" do
-				@finded_post.rated?(@alice).should be_false
+				@finded_post.rated_by?(@alice).should be_false
 			end
     end
 
@@ -222,11 +222,11 @@ describe Post do
 
 			describe "#rated?" do
 				it "should be #rated? by Bob" do
-					@finded_post.rated?(@bob).should be_true
+					@finded_post.rated_by?(@bob).should be_true
 				end
 
 				it "should be not #rated? by Sally" do
-					@finded_post.rated?(@sally).should be_false
+					@finded_post.rated_by?(@sally).should be_false
 				end
 
 				it "should be #rated?" do
