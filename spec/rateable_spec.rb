@@ -70,20 +70,20 @@ describe Post do
       end
 
       describe "for Bob" do
-        specify { @post.rated?(@bob).should be_true }
+        specify { @post.rated_by?(@bob).should be_true }
       end
 
       describe "when rated by someone else" do
         before { @post.rate 1, @alice }
 
         describe "for Alice" do
-          specify { @post.rated?(@alice).should be_true }
+          specify { @post.rated_by?(@alice).should be_true }
         end
       end
 
       describe "when not rated by someone else" do
         describe "for Sally" do
-          specify { @post.rated?(@sally).should be_false }
+          specify { @post.rated_by?(@sally).should be_false }
         end
       end
     end
@@ -156,15 +156,15 @@ describe Post do
 
     describe "#rated?" do
       describe "for Bob" do
-        specify { @finded_post.rated?(@bob).should be_true }
+        specify { @finded_post.rated_by?(@bob).should be_true }
       end
 
       describe "for Sally" do
-        specify { @finded_post.rated?(@sally).should be_true }
+        specify { @finded_post.rated_by?(@sally).should be_true }
       end
 
       describe "for Alice" do
-        specify { @finded_post.rated?(@alice).should be_false}
+        specify { @finded_post.rated_by?(@alice).should be_false}
       end
     end
 

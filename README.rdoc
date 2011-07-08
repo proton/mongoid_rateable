@@ -52,7 +52,7 @@ Sure, you can rate and save in one fuction:
 
 You'll often want to know if a user already rated post.  Simple:
 
-    @post.rated? @user      # True if it rated by user
+    @post.rated_by? @user   # True if it rated by user
 
 And if someone rated it:
 

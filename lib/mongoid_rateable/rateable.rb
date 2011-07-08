@@ -44,10 +44,15 @@ module Mongoid
 
 			def rated?(rater = nil)
 				if rater
-					self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
+					puts "Deprecated method, please use rated_by?"
+					rated_by?(rater)
 				else
 					rate_count!=0
 				end
+			end
+
+			def rated_by?(rater)
+				self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
 			end
 
 			def rating
