@@ -4,5 +4,5 @@ store rate_count and average_rate as fields (need migration to migrate from othe
 improve speed (http://cookbook.mongodb.org/patterns/votes/)
 rate embedded (indexes?!)
 add random values to specs
-for 0.0.9: add migration task for rating field
+add task for rating update
 look at https://github.com/jasherai/acts-as-rated features

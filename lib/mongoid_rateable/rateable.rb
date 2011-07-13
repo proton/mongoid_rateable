@@ -80,7 +80,6 @@ module Mongoid
 
 			def calculate_and_store_rating
 				unless self.rating_marks.empty?
-					puts "Deprecated"
 					update_rating
 					read_attribute(:rating)
 				end
