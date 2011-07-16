@@ -5,7 +5,6 @@ module Mongoid
 		included do
 			field :rates, :type => Integer, :default => 0
 			field :rating, :type => Float, :default => nil
-			field :rate_count, :type => Integer, :default => 0
 
 			embeds_many :rating_marks, :as => :rateable
 
@@ -17,8 +16,8 @@ module Mongoid
 				unique: true
 			)
 
-			scope :unrated, where(rate_count: 0)
-			scope :rated, where(:rate_count.gt => 0)
+			scope :unrated, where(:rating_marks.size => 0)
+			scope :rated, where(:rating_marks.size.gt => 0)
 			scope :rated_by, ->(rater) { where(:rating_marks.rater => rater) }
 			scope :with_rating_in, ->(range) { where(:rating.gte => range.begin, :rating.lte => range.end) }
 		end
