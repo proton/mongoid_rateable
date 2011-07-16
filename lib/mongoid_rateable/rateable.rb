@@ -16,6 +16,9 @@ module Mongoid
 				],
 				unique: true
 			)
+
+			scope :unrated,  :where => { :rate_count => 0 }
+			scope :rated,  :where => { :rate_count.gt => 0 }
 		end
 
 		module InstanceMethods
