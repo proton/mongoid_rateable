@@ -1,4 +1,5 @@
-add method/scope most_voted(count), rated_between(3,5), rated_by(user) to Rateable
+test scopes
+add scopes to README
 add min/max rating
 improve speed (http://cookbook.mongodb.org/patterns/votes/)
 rate embedded (indexes?!)

@@ -17,8 +17,10 @@ module Mongoid
 				unique: true
 			)
 
-			scope :unrated,  :where => { :rate_count => 0 }
-			scope :rated,  :where => { :rate_count.gt => 0 }
+			scope :unrated, where(rate_count: 0)
+			scope :rated, where(:rate_count.gt => 0)
+			scope :rated_by, ->(rater) { where(:rating_marks.rater => rater) }
+			scope :with_rating_in, ->(range) { where(:rating.gte => range.begin, :rating.lte => range.end) }
 		end
 
 		module InstanceMethods
