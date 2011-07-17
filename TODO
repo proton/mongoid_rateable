@@ -1,5 +1,3 @@
-test scopes
-add scopes to README
 add min/max rating
 improve speed (http://cookbook.mongodb.org/patterns/votes/)
 rate embedded (indexes?!)
