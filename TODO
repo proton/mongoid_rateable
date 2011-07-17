@@ -3,4 +3,3 @@ improve speed (http://cookbook.mongodb.org/patterns/votes/)
 rate embedded (indexes?!)
 add random values to specs
 add task for rating update
-look at https://github.com/jasherai/acts-as-rated features
