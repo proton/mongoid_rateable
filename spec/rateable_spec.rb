@@ -256,9 +256,9 @@ describe Post do
 			@post3 = Post.create
 			@post4 = Post.create
 			@post5 = Post.create
-			@post1.rate 5, @sally
-			@post1.rate 3, @bob
-			@post4.rate 1, @sally
+			@post1.rate_and_save 5, @sally
+			@post1.rate_and_save 3, @bob
+			@post4.rate_and_save 1, @sally
 		end
 
     describe "#unrated" do
@@ -285,10 +285,10 @@ describe Post do
 
     describe "#with_rating" do
 			before (:each) do
-				@post1.rate 4, @alice
-				@post2.rate 2, @alice
-				@post3.rate 5, @alice
-				@post4.rate 2, @alice
+				@post1.rate_and_save 4, @alice
+				@post2.rate_and_save 2, @alice
+				@post3.rate_and_save 5, @alice
+				@post4.rate_and_save 2, @alice
 			end
 
 			it "should return proper count of posts with rating 4..5" do
