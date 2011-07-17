@@ -247,4 +247,61 @@ describe Post do
 			end
     end
   end
+
+  describe "#scopes" do
+		before (:each) do
+			@post.delete
+			@post1 = Post.create
+			@post2 = Post.create
+			@post3 = Post.create
+			@post4 = Post.create
+			@post5 = Post.create
+			@post1.rate 5, @sally
+			@post1.rate 3, @bob
+			@post4.rate 1, @sally
+		end
+
+    describe "#unrated" do
+			it "should return proper count of unrated posts" do
+				Post.unrated.size.should eql 3
+			end
+		end
+
+    describe "#rated" do
+			it "should return proper count of rated posts" do
+				Post.rated.size.should eql 2
+			end
+		end
+
+    describe "#rated_by" do
+			it "should return proper count of posts rated by Bob" do
+				Post.rated_by(@bob).size.should eql 1
+			end
+
+			it "should return proper count of posts rated by Sally" do
+				Post.rated_by(@sally).size.should eql 2
+			end
+		end
+
+    describe "#with_rating" do
+			before (:each) do
+				@post1.rate 4, @alice
+				@post2.rate 2, @alice
+				@post3.rate 5, @alice
+				@post4.rate 2, @alice
+			end
+
+			it "should return proper count of posts with rating 4..5" do
+				Post.with_rating(4..5).size.should eql 2
+			end
+
+			it "should return proper count of posts with rating 0..2" do
+				Post.with_rating(0..2).size.should eql 2
+			end
+
+			it "should return proper count of posts with rating 0..5" do
+				Post.with_rating(0..5).size.should eql 4
+			end
+		end
+  end
 end

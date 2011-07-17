@@ -17,9 +17,9 @@ module Mongoid
 			)
 
 			scope :unrated, where(:rating_marks.size => 0)
-			scope :rated, where(:rating_marks.size.gt => 0)
-			scope :rated_by, ->(rater) { where(:rating_marks.rater => rater) }
-			scope :with_rating_in, ->(range) { where(:rating.gte => range.begin, :rating.lte => range.end) }
+			scope :rated, where(:rating.exists => true)
+			scope :rated_by, ->(rater) { where(:rating_marks.rater_id => rater.id, :rating_marks.rater_class => rater.class.to_s) }
+			scope :with_rating, ->(range) { where(:rating.gte => range.begin, :rating.lte => range.end) }
 		end
 
 		module InstanceMethods
@@ -78,8 +78,8 @@ module Mongoid
 			end
 
 			def update_rating
- 				rt = (self.rates.to_f / self.rating_marks.size) unless self.rating_marks.blank?
- 				write_attribute(:rating, rt)
+				rt = (self.rates.to_f / self.rating_marks.size) unless self.rating_marks.blank?
+				write_attribute(:rating, rt)
 			end
 
 			def calculate_and_store_rating
