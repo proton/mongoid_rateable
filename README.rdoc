@@ -66,6 +66,23 @@ You can get the average rating:
 
     @post.rating            # rates / raters.count
 
+== Scopes
+
+You can get rated or unrated posts:
+
+    Post.rated
+    Post.unrated
+
+You can get posts rated by someone:
+
+    Post.rated_by(@user)
+
+You can get posts with some rating:
+
+    Post.with_rating(2..5)
+    Post.with_rating(0..10)
+    Post.with_rating(-2..2)
+
 == Contributing to Mongoid::Rateable
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
