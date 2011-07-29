@@ -10,10 +10,9 @@ module Mongoid
 
 			index(
 				[
-					["rating_marks.rater_id"],
-					["rating_marks.rater_class"]
-				],
-				unique: true
+					["rating_marks.rater_id", Mongo::ASCENDING],
+					["rating_marks.rater_class", Mongo::ASCENDING]
+				]
 			)
 
 			scope :unrated, where(:rating.exists => false)
