@@ -60,7 +60,7 @@ module Mongoid
 			end
 
 			def rating
-				read_attribute(:rating) || calculate_and_store_rating
+				read_attribute(:rating)
 			end
 
 			def rate_count
@@ -70,8 +70,8 @@ module Mongoid
 			protected
 
 			def validate_rating!(value)
- 				if (defined? self.class::RATING_RANGE) and (range = self.class::RATING_RANGE) and !range.include?(value.to_i)
- 					raise ArgumentError, "Rating not in range #{range}. Rating provided was #{value}."
+				if (defined? self.class::RATING_RANGE) and (range = self.class::RATING_RANGE) and !range.include?(value.to_i)
+					raise ArgumentError, "Rating not in range #{range}. Rating provided was #{value}."
  				end
 			end
 
@@ -86,14 +86,6 @@ module Mongoid
 			def update_rating
 				rt = (self.rates.to_f / self.rating_marks.size) unless self.rating_marks.blank?
 				write_attribute(:rating, rt)
-			end
-
-			def calculate_and_store_rating
-				unless self.rating_marks.empty?
-					update_rating
-					read_attribute(:rating)
-				end
-				nil
 			end
 
 		end

@@ -26,12 +26,6 @@ describe Post do
   it { should respond_to :rating }
   it { should respond_to :rating_marks }
 
-  describe "#rates" do
-    it "should be proper Mongoid field" do
-      @post.fields['rates'].should be_an_instance_of Mongoid::Field
-    end
-  end
-
   describe "#rating_marks" do
     it "should be proper Mongoid field" do
       @post.rating_marks.should be_an_instance_of Array
@@ -100,15 +94,15 @@ describe Post do
     describe "#unrate" do
       before { @post.unrate @bob }
 
-			it "should have null #rate_count" do
+      it "should have null #rate_count" do
         @post.rate_count.should eql 0
       end
 
-			it "should have null #rates" do
+      it "should have null #rates" do
         @post.rates.should eql 0
       end
 
-			it "should be unrated" do
+      it "should be unrated" do
         @post.rated?.should be_false
       end
     end
