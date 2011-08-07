@@ -24,6 +24,7 @@ module Mongoid
 		module InstanceMethods
 
 			def rate(mark, rater)
+				validate_rating!(mark)
 				unrate_without_rating_update(rater)
 				self.rates += mark.to_i
 				self.rating_marks.new(:rater_id => rater.id, :mark => mark, :rater_class => rater.class.to_s)
@@ -66,7 +67,13 @@ module Mongoid
 				rating_marks.size
 			end
 
-			private
+			protected
+
+			def validate_rating!(value)
+ 				if (defined? self.class::RATING_RANGE) and (range = self.class::RATING_RANGE) and !range.include?(value.to_i)
+ 					raise ArgumentError, "Rating not in range #{range}. Rating provided was #{value}."
+ 				end
+			end
 
 			def unrate_without_rating_update(rater)
 				rmark = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first

@@ -7,6 +7,7 @@ describe Post do
     @alice = User.create :name => "Alice"
     @sally = User.create :name => "Sally"
     @post = Post.create :name => "Announcement"
+    @article = Article.create :name => "Article"
   end
 
   it "should have Mongoid::Rateable module" do
@@ -49,6 +50,14 @@ describe Post do
       it "should limit #rates by user properly" do
         @post.rate 5, @bob
         @post.rates.should eql 5
+      end
+
+      it "should not raise exception if rate_value in RATING_RANGE" do
+        lambda { @article.rate 1, @sally }.should_not raise_error
+      end
+
+      it "should raise exception if rate_value not in RATING_RANGE" do
+        lambda { @article.rate 7, @sally }.should raise_error(ArgumentError)
       end
 
       #TODO: Rewrite for random values
