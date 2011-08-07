@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mongoid_rateable}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Peter Savichev (proton)"]
-  s.date = %q{2011-07-29}
+  s.authors = [%q{Peter Savichev (proton)}]
+  s.date = %q{2011-08-07}
   s.description = %q{Provides fields and methods for the manipulation of rates on Mongoid documents.}
   s.email = %q{psavichev@gmail.com}
   s.extra_rdoc_files = [
@@ -31,15 +31,16 @@ Gem::Specification.new do |s|
     "lib/mongoid_rateable/rateable.rb",
     "lib/mongoid_rateable/rating.rb",
     "mongoid_rateable.gemspec",
+    "spec/models/article.rb",
     "spec/models/post.rb",
     "spec/models/user.rb",
     "spec/rateable_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/proton/mongoid_rateable}
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.licenses = [%q{MIT}]
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.6}
   s.summary = %q{Rating functionality for Mongoid documents}
 
   if s.respond_to? :specification_version then
