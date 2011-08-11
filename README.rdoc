@@ -1,6 +1,6 @@
 = Mongoid::Rateable
 
-Adding simple rating functionality for Mongoid models
+Provides fields and methods for the *rating* manipulation on Mongoid documents
 
 == Installation
 

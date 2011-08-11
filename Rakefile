@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/proton/mongoid_rateable"
   gem.license = "MIT"
   gem.summary = %q{Rating functionality for Mongoid documents}
-  gem.description = %q{Provides fields and methods for the manipulation of rates on Mongoid documents.}
+  gem.description = %q{Provides fields and methods for the rating manipulation on Mongoid documents.}
   gem.email = "psavichev@gmail.com"
   gem.authors = ["Peter Savichev (proton)"]
   # dependencies defined in Gemfile
