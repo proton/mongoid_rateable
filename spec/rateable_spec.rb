@@ -306,5 +306,34 @@ describe Post do
 				Post.with_rating(0..5).size.should eql 4
 			end
 		end
+
+    describe "#most_rated" do
+			it "should return proper count of posts" do
+				#mongoid has problems with returning count of documents (https://github.com/mongoid/mongoid/issues/817)
+				posts_count = 0
+				Post.most_rated(2).each {|x| posts_count+=1 }
+				posts_count.should eql 2
+			end
+
+			it "should return proper count of posts" do
+				posts_count = 0
+				Post.most_rated(7).each {|x| posts_count+=1 }
+				posts_count.should eql 5
+			end
+		end
+
+    describe "#highest_rated" do
+			it "should return proper count of posts" do
+				posts_count = 0
+				Post.highest_rated(1).each {|x| posts_count+=1 }
+				posts_count.should eql 1
+			end
+
+			it "should return proper count of posts" do
+				posts_count = 0
+				Post.highest_rated(10).each {|x| posts_count+=1 }
+				posts_count.should eql 5
+			end
+		end
   end
 end

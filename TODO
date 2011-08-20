@@ -3,5 +3,4 @@ rate embedded (indexes?!)
 add random values to specs
 add task for rating update
 add bayesian_rating ( https://github.com/mepatterson/acts_as_mongo_rateable )
-add scopes for most_rated/highest_rated
 add weight to rating

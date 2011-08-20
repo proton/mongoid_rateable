@@ -85,6 +85,13 @@ You can get posts with some rating:
     Post.with_rating(0..10)
     Post.with_rating(-2..2)
 
+You can get most rated and highest rated posts:
+
+    Post.most_rated         # 10 (or less) most rated posts
+    Post.most_rated(5)      # 5 (or less) most rated posts
+    Post.highest_rated      # 10 (or less) highest rated posts
+    Post.highest_rated(20)  # (20 (or less) highest rated posts
+
 == Contributing to Mongoid::Rateable
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet

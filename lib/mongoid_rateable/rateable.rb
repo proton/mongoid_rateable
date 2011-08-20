@@ -19,6 +19,8 @@ module Mongoid
 			scope :rated, where(:rating.exists => true)
 			scope :rated_by, ->(rater) { where("rating_marks.rater_id" => rater.id, "rating_marks.rater_class" => rater.class.to_s) }
 			scope :with_rating, ->(range) { where(:rating.gte => range.begin, :rating.lte => range.end) }
+ 			scope :most_rated, ->(limit=10) { order_by(["rating_marks.size", :desc]).limit(limit) }
+ 			scope :highest_rated, ->(limit=10) { order_by(["rating_marks.size", :desc]).limit(limit) }
 		end
 
 		module InstanceMethods
