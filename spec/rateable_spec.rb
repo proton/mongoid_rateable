@@ -254,11 +254,11 @@ describe Post do
   describe "#scopes" do
 		before (:each) do
 			@post.delete
-			@post1 = Post.create
-			@post2 = Post.create
-			@post3 = Post.create
-			@post4 = Post.create
-			@post5 = Post.create
+			@post1 = Post.create(:name => "Post 1")
+			@post2 = Post.create(:name => "Post 2")
+			@post3 = Post.create(:name => "Post 3")
+			@post4 = Post.create(:name => "Post 4")
+			@post5 = Post.create(:name => "Post 5")
 			@post1.rate_and_save 5, @sally
 			@post1.rate_and_save 3, @bob
 			@post4.rate_and_save 1, @sally
@@ -307,32 +307,23 @@ describe Post do
 			end
 		end
 
-    describe "#most_rated" do
-			it "should return proper count of posts" do
-				#mongoid has problems with returning count of documents (https://github.com/mongoid/mongoid/issues/817)
-				posts_count = 0
-				Post.most_rated(2).each {|x| posts_count+=1 }
-				posts_count.should eql 2
-			end
-
-			it "should return proper count of posts" do
-				posts_count = 0
-				Post.most_rated(7).each {|x| posts_count+=1 }
-				posts_count.should eql 5
-			end
-		end
-
     describe "#highest_rated" do
 			it "should return proper count of posts" do
+				#mongoid has problems with returning count of documents (https://github.com/mongoid/mongoid/issues/817)
 				posts_count = 0
 				Post.highest_rated(1).each {|x| posts_count+=1 }
 				posts_count.should eql 1
 			end
 
 			it "should return proper count of posts" do
+				#mongoid has problems with returning count of documents (https://github.com/mongoid/mongoid/issues/817)
 				posts_count = 0
 				Post.highest_rated(10).each {|x| posts_count+=1 }
 				posts_count.should eql 5
+			end
+
+			it "should return proper document" do
+				Post.highest_rated(1).first.name.should eql "Post 1"
 			end
 		end
   end
