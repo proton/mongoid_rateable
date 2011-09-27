@@ -5,6 +5,7 @@ module Mongoid
 		included do
 			field :rates, :type => Integer, :default => 0
 			field :rating, :type => Float, :default => nil
+			field :weighted_rate_count, :type => Integer, :default => 0
 
 			embeds_many :rating_marks, :as => :rateable
 
@@ -24,12 +25,14 @@ module Mongoid
 
 		module InstanceMethods
 
-			def rate(mark, rater)
-				validate_rating!(mark)
-				unrate_without_rating_update(rater)
-				self.rates += mark.to_i
-				self.rating_marks.new(:rater_id => rater.id, :mark => mark, :rater_class => rater.class.to_s)
-				update_rating
+			def rate(mark, rater, weight = 1)
+ 				validate_rating!(mark)
+ 				unrate_without_rating_update(rater)
+ 				total_mark = mark.to_i*weight.to_i
+ 				self.rates += total_mark
+ 				self.rating_marks.new(:rater_id => rater.id, :mark => mark, :rater_class => rater.class.to_s, :weight => weight)
+				self.weighted_rate_count += weight
+ 				update_rating
 			end
 
 			def unrate(rater)
@@ -37,8 +40,8 @@ module Mongoid
 				update_rating
 			end
 
-			def rate_and_save(mark, rater)
-				rate(mark, rater)
+			def rate_and_save(mark, rater, weight = 1)
+				rate(mark, rater, weight)
 				save
 			end
 
@@ -65,7 +68,12 @@ module Mongoid
 			end
 
 			def rate_count
-				rating_marks.size
+				self.rating_marks.size
+			end
+
+			def rate_weight
+				check_weighted_rate_count
+				read_attribute(:weighted_rate_count)
 			end
 
 			protected
@@ -79,14 +87,26 @@ module Mongoid
 			def unrate_without_rating_update(rater)
 				rmark = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
 				if rmark
-					self.rates -= rmark.mark.to_i
+					weight = (rmark.weight ||= 1)
+					total_mark = rmark.mark.to_i*weight.to_i
+					self.rates -= total_mark
+					self.weighted_rate_count -= weight
 					rmark.delete
 				end
 			end
 
 			def update_rating
-				rt = (self.rates.to_f / self.rating_marks.size) unless self.rating_marks.blank?
-				write_attribute(:rating, rt)
+				check_weighted_rate_count
+				rt = (self.rates.to_f / self.weighted_rate_count.to_f) unless self.rating_marks.blank?
+ 				write_attribute(:rating, rt)
+			end
+
+			def check_weighted_rate_count
+				#migration from old version
+				wrc = read_attribute(:weighted_rate_count).to_i
+				if (wrc==0 && rate_count!=0)
+					write_attribute(:weighted_rate_count, self.rating_marks.size)
+				end
 			end
 
 		end

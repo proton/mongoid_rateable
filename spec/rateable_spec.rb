@@ -40,6 +40,10 @@ describe Post do
         @post.rate 1, @sally
         @post.rates.should eql 2
       end
+      it "should track weighted #rates properly" do
+        @post.rate 1, @alice, 4
+        @post.rates.should eql 5
+      end
 
       it "should limit #rates by user properly" do
         @post.rate 5, @bob
@@ -56,12 +60,12 @@ describe Post do
 
       #TODO: Rewrite for random values
       describe "when using negative values" do
-        it "should work properly for -1" do
-          @post.rate -1, @sally
-          @post.rates.should eql 0
-        end
-        it "should work properly for -2" do
+        it "should work properly for -3" do
           @post.rate -3, @sally
+          @post.rates.should eql -2
+        end
+        it "should work properly for -1 with weight 3" do
+          @post.rate -1, @sally, 3
           @post.rates.should eql -2
         end
       end
@@ -186,7 +190,7 @@ describe Post do
 
   describe "#rate_and_save" do
     before (:each) do
-      @post.rate_and_save 8, @bob
+      @post.rate_and_save 8, @bob, 2
       @post.rate_and_save -10, @sally
       @finded_post = Post.where(:name => "Announcement").first
     end
@@ -205,31 +209,35 @@ describe Post do
 			end
     end
 
-    it "should have #rates equal -2" do
-			@finded_post.rates.should eql -2
+    it "should have #rates equal 6" do
+			@finded_post.rates.should eql 6
     end
 
     it "should have #rate_count equal 2" do
 			@finded_post.rate_count.should eql 2
     end
 
-    it "should have #rating equal -1.0" do
-			@finded_post.rating.should eql -1.0
+    it "should have #rate_weight equal 3" do
+			@finded_post.rate_weight.should eql 3
+    end
+
+    it "should have #rating equal 2.0" do
+			@finded_post.rating.should eql 2.0
     end
 
     describe "#unrate_and_save" do
 			before (:each) do
-				@post.unrate_and_save @sally
+				@post.unrate_and_save @bob
 				@finded_post = Post.where(:name => "Announcement").first
 			end
 
 			describe "#rated?" do
-				it "should be #rated? by Bob" do
-					@finded_post.rated_by?(@bob).should be_true
+				it "should be #rated? by Sally" do
+					@finded_post.rated_by?(@sally).should be_true
 				end
 
-				it "should be not #rated? by Sally" do
-					@finded_post.rated_by?(@sally).should be_false
+				it "should be not #rated? by Bob" do
+					@finded_post.rated_by?(@bob).should be_false
 				end
 
 				it "should be #rated?" do
@@ -237,16 +245,20 @@ describe Post do
 				end
 			end
 
-			it "should have #rates equal 8" do
-				@finded_post.rates.should eql 8
+			it "should have #rates equal -10" do
+				@finded_post.rates.should eql -10
 			end
 
 			it "should have #rate_count equal 1" do
 				@finded_post.rate_count.should eql 1
 			end
 
-			it "should have #rating equal 8.0" do
-				@finded_post.rating.should eql 8.0
+			it "should have #rate_weight equal 1" do
+				@finded_post.rate_weight.should eql 1
+			end
+
+			it "should have #rating equal -10.0" do
+				@finded_post.rating.should eql -10.0
 			end
     end
   end

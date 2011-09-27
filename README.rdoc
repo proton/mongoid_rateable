@@ -37,6 +37,11 @@ You can rate by passing an integer and a rater model to the "rate" method:
     @post.rate 5, @user     # I LOVE this!
     @post.rate -10, @user   # Delete it from the Internet!
 
+Rates have weight (1 by defaut)
+
+    @post.rate 5, @user, 3     # Rate @post with weight 3 (@user has high karma)
+    @post.rate 3, @user, 1     # Rate @post with weight 1 (@user has low karma)
+
 You can unrate by using "unrate" method:
 
     @post.unrate @user
@@ -60,13 +65,17 @@ And if someone rated it:
 
     @post.rated?            # True if it rated by someone
 
-You can also get a tally of the number of votes cast:
+You can also get a tally of the number of rates cast:
 
     @post.rate_count        # Just one so far!
 
-You can get the average rating:
+You can get a total weight of post rates:
 
-    @post.rating            # rates / raters.count
+    @post.rate_weight        # Just one so far!
+
+And you can get the average rating:
+
+    @post.rating            # rates / rate_weight
 
 == Scopes
 
