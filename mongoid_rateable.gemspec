@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Peter Savichev (proton)}]
-  s.date = %q{2011-09-27}
+  s.date = %q{2011-10-01}
   s.description = %q{Provides fields and methods for the rating manipulation on Mongoid documents.}
   s.email = %q{psavichev@gmail.com}
   s.extra_rdoc_files = [
