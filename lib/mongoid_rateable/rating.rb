@@ -1,5 +1,7 @@
 class RatingMark
 	include Mongoid::Document
+  include Mongoid::Timestamps::Created
+
 	embedded_in :rateable, :polymorphic => true
 	field :mark, :type => Integer
 	field :rater_class, :type => String
