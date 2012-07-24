@@ -47,14 +47,14 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     s.add_dependency(%q<mongoid>, [">= 3.0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<bundler>, [">= 1.0.0"])
     s.add_dependency(%q<simplecov>, [">= 0.4.0"])
     s.add_dependency(%q<rdoc>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 2.0.0"])
     s.add_dependency(%q<database_cleaner>, [">= 0"])
   else
     s.add_dependency(%q<mongoid>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<bundler>, [">= 1.0.0"])
     s.add_dependency(%q<simplecov>, [">= 0.4.0"])
     s.add_dependency(%q<rdoc>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 2.0.0"])
