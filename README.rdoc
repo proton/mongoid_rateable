@@ -2,7 +2,7 @@
 
 Provides fields and methods for the *rating* manipulation on Mongoid documents
 
-{<img src="https://secure.travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png" />}[http://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME]]
+{<img src="https://secure.travis-ci.org/proton/mongoid_rateable.png" />}[http://travis-ci.org/proton/mongoid_rateable]
 
 == Installation
 
