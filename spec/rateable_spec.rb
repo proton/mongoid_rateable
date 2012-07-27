@@ -126,7 +126,7 @@ describe Post do
 
       it "should calculate the average rate if the result is zero" do
         @post.rate -1, @sally
-        @post.rating.should eql 0.0
+        @post.rating.should eq 0.0
       end
     end
   end
@@ -184,7 +184,7 @@ describe Post do
     end
 
     describe "#rating" do
-      specify { @finded_post.rating.should eql -1.0 }
+      specify { @finded_post.rating.should eq -1.0 }
     end
   end
 
@@ -222,7 +222,7 @@ describe Post do
     end
 
     it "should have #rating equal 2.0" do
-			@finded_post.rating.should eql 2.0
+			@finded_post.rating.should eq 2.0
     end
 
     describe "#unrate_and_save" do
@@ -258,7 +258,7 @@ describe Post do
 			end
 
 			it "should have #rating equal -10.0" do
-				@finded_post.rating.should eql -10.0
+				@finded_post.rating.should eq -10.0
 			end
     end
   end
