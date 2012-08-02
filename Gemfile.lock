@@ -16,6 +16,7 @@ GEM
     builder (3.0.0)
     database_cleaner (0.8.0)
     diff-lcs (1.1.3)
+    gemcutter (0.7.1)
     i18n (0.6.0)
     mongoid (3.0.3)
       activemodel (~> 3.1)
@@ -46,6 +47,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   database_cleaner
+  gemcutter
   mongoid (>= 3.0)
   mongoid_rateable!
   rake
