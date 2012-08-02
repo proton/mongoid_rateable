@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    mongoid_rateable (0.2)
+    mongoid_rateable (0.2.0)
       mongoid (>= 3.0)
+      mongoid_rateable
 
 GEM
   remote: http://rubygems.org/
