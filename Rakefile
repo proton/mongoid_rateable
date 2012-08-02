@@ -37,7 +37,7 @@ task :default => :spec
 
 require 'rdoc/task'
 RDoc::Task.new do |rdoc|
-	version = MongoidRateable::VERSION
+	version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "mongoid_rateable #{version}"
@@ -55,5 +55,5 @@ end
 
 desc "Release gem"
 task :release => :build do
-	version = MongoidRateable::VERSION
+	version = File.exist?('VERSION') ? File.read('VERSION') : ""
 end
