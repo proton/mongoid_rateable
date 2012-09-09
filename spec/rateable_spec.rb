@@ -24,6 +24,7 @@ describe Post do
   it { should respond_to :rate_count }
   it { should respond_to :rates }
   it { should respond_to :rating }
+  it { should respond_to :unweighted_rating }
   it { should respond_to :rating_marks }
 
   describe "#rating_marks" do
@@ -129,6 +130,18 @@ describe Post do
         @post.rating.should eq 0.0
       end
     end
+
+    describe "#unweighted_rating" do
+      it "should calculate the average rate" do
+        @post.rate 4, @sally
+        @post.unweighted_rating.should eql 2.5
+      end
+
+      it "should calculate the average rate if the result is zero" do
+        @post.rate -1, @sally
+        @post.unweighted_rating.should eq 0.0
+      end
+    end
   end
 
   context "when not rated" do
@@ -138,6 +151,10 @@ describe Post do
 
     describe "#rating" do
       specify { @post.rating.should be_nil }
+    end
+
+    describe "#unweighted_rating" do
+      specify { @post.unweighted_rating.should be_nil }
     end
 
     describe "#unrate" do
@@ -186,6 +203,10 @@ describe Post do
     describe "#rating" do
       specify { @finded_post.rating.should eq -1.0 }
     end
+
+    describe "#unweighted_rating" do
+      specify { @finded_post.unweighted_rating.should eq -1.0 }
+    end
   end
 
   describe "#rate_and_save" do
@@ -222,7 +243,11 @@ describe Post do
     end
 
     it "should have #rating equal 2.0" do
-			@finded_post.rating.should eq 2.0
+      @finded_post.rating.should eq 2.0
+    end
+
+    it "should have #unweighted_rating equal 2.0" do
+      @finded_post.unweighted_rating.should eq -1.0
     end
 
     describe "#unrate_and_save" do
@@ -257,9 +282,13 @@ describe Post do
 				@finded_post.rate_weight.should eql 1
 			end
 
-			it "should have #rating equal -10.0" do
-				@finded_post.rating.should eq -10.0
-			end
+      it "should have #rating equal -10.0" do
+        @finded_post.rating.should eq -10.0
+      end
+
+      it "should have #unweighted_rating equal -10.0" do
+        @finded_post.unweighted_rating.should eq -10.0
+      end
     end
   end
 

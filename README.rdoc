@@ -82,6 +82,11 @@ And you can get the average rating:
 
     @post.rating            # rates / rate_weight
 
+And you can get the average rating without weights (It calculates realtime, so it can be slow):
+
+    @post.unweighted_rating # rates without weights / rate_count
+
+
 == Scopes
 
 You can get rated or unrated posts:

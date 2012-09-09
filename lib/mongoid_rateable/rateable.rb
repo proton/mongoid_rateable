@@ -55,6 +55,12 @@ module Mongoid
       read_attribute(:rating)
     end
 
+    def unweighted_rating
+      return nil if self.rating_marks.empty?
+      total_sum = self.rating_marks.map(&:mark).sum
+      return total_sum.to_f/self.rating_marks.size
+    end
+
     def rate_count
       self.rating_marks.size
     end
