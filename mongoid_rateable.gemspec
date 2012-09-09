@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mongoid_rateable"
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Savichev (proton)"]
-  s.date = "2012-08-02"
+  s.date = "2012-09-09"
   s.description = "Provides fields and methods for the rating manipulation on Mongoid documents."
   s.email = "psavichev@gmail.com"
   s.extra_rdoc_files = [
@@ -75,9 +75,45 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rdoc>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_development_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_development_dependency(%q<rdoc>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_development_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_development_dependency(%q<rdoc>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_development_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_development_dependency(%q<rdoc>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
     else
       s.add_dependency(%q<mongoid_rateable>, [">= 0"])
       s.add_dependency(%q<mongoid>, [">= 3.0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_dependency(%q<rdoc>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_dependency(%q<rdoc>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 2.0.0"])
+      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+      s.add_dependency(%q<rdoc>, [">= 0"])
+      s.add_dependency(%q<rspec>, [">= 2.0.0"])
       s.add_dependency(%q<database_cleaner>, [">= 0"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
@@ -107,6 +143,24 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<mongoid_rateable>, [">= 0"])
     s.add_dependency(%q<mongoid>, [">= 3.0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+    s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+    s.add_dependency(%q<rdoc>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 2.0.0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+    s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+    s.add_dependency(%q<rdoc>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 2.0.0"])
+    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+    s.add_dependency(%q<simplecov>, [">= 0.4.0"])
+    s.add_dependency(%q<rdoc>, [">= 0"])
+    s.add_dependency(%q<rspec>, [">= 2.0.0"])
     s.add_dependency(%q<database_cleaner>, [">= 0"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
