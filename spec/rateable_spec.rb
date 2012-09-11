@@ -24,6 +24,8 @@ describe Post do
   it { should respond_to :rate_count }
   it { should respond_to :rates }
   it { should respond_to :rating }
+  it { should respond_to :previous_rating }
+  it { should respond_to :rating_delta }
   it { should respond_to :unweighted_rating }
   it { should respond_to :rating_marks }
 
@@ -122,7 +124,7 @@ describe Post do
     describe "#rating" do
       it "should calculate the average rate" do
         @post.rate 4, @sally
-        @post.rating.should eql 2.5
+        @post.rating.should eq 2.5
       end
 
       it "should calculate the average rate if the result is zero" do
@@ -131,13 +133,38 @@ describe Post do
       end
     end
 
-    describe "#unweighted_rating" do
-      it "should calculate the average rate" do
+    describe "#previous_rating" do
+      it "should store previous value of the average rate" do
         @post.rate 4, @sally
-        @post.unweighted_rating.should eql 2.5
+        @post.previous_rating.should eq 1.0
       end
 
-      it "should calculate the average rate if the result is zero" do
+      it "should store previous value of the average rate after two changes" do
+        @post.rate -1, @sally
+        @post.rate 4, @sally
+        @post.previous_rating.should eq 0.0
+      end
+    end
+
+    describe "#rating_delta" do
+      it "should calculate delta of previous and new ratings" do
+        @post.rate 4, @sally
+        @post.rating_delta.should eq 1.5
+      end
+
+      it "should calculate delta of previous and new ratings" do
+        @post.rate -1, @sally
+        @post.rating_delta.should eq -1.0
+      end
+    end
+
+    describe "#unweighted_rating" do
+      it "should calculate the unweighted average rate" do
+        @post.rate 4, @sally
+        @post.unweighted_rating.should eq 2.5
+      end
+
+      it "should calculate the unweighted average rate if the result is zero" do
         @post.rate -1, @sally
         @post.unweighted_rating.should eq 0.0
       end
@@ -151,6 +178,14 @@ describe Post do
 
     describe "#rating" do
       specify { @post.rating.should be_nil }
+    end
+
+    describe "#previous_rating" do
+      specify { @post.previous_rating.should be_nil }
+    end
+
+    describe "#rating_delta" do
+      specify { @post.rating_delta.should eq 0.0 }
     end
 
     describe "#unweighted_rating" do
@@ -204,6 +239,14 @@ describe Post do
       specify { @finded_post.rating.should eq -1.0 }
     end
 
+    describe "#previous_rating" do
+      specify { @finded_post.previous_rating.should eq 8.0 }
+    end
+
+    describe "#rating_delta" do
+      specify { @post.rating_delta.should eq -9.0 }
+    end
+
     describe "#unweighted_rating" do
       specify { @finded_post.unweighted_rating.should eq -1.0 }
     end
@@ -246,6 +289,14 @@ describe Post do
       @finded_post.rating.should eq 2.0
     end
 
+    it "should have #previous_rating equal 8.0" do
+      @finded_post.previous_rating.should eq 8.0
+    end
+
+    it "should have #rating_delta equal -6.0" do
+      @finded_post.rating_delta.should eq -6.0
+    end
+
     it "should have #unweighted_rating equal 2.0" do
       @finded_post.unweighted_rating.should eq -1.0
     end
@@ -284,6 +335,14 @@ describe Post do
 
       it "should have #rating equal -10.0" do
         @finded_post.rating.should eq -10.0
+      end
+
+      it "should have #previous_rating equal 2.0" do
+        @finded_post.previous_rating.should eq 2.0
+      end
+
+      it "should have #rating_delta equal -12.0" do
+        @finded_post.rating_delta.should eq -12.0
       end
 
       it "should have #unweighted_rating equal -10.0" do

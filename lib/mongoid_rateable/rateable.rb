@@ -3,9 +3,11 @@ module Mongoid
     extend ActiveSupport::Concern
 
     included do
-      field :rates, :type => Integer, :default => 0
-      field :rating, :type => Float, :default => nil
-      field :weighted_rate_count, :type => Integer, :default => 0
+      field :rates, type: Integer, default: 0
+      field :rating, type: Float, default: nil
+      field :rating_previous, type: Float, default: nil
+      field :rating_delta, type: Float, default: 0.0
+      field :weighted_rate_count, type: Integer, default: 0
 
       embeds_many :rating_marks, :as => :rateable
 
@@ -55,6 +57,14 @@ module Mongoid
       read_attribute(:rating)
     end
 
+    def previous_rating
+      read_attribute(:rating_previous)
+    end
+
+    def rating_delta
+      read_attribute(:rating_delta)
+    end
+
     def unweighted_rating
       return nil if self.rating_marks.empty?
       total_sum = self.rating_marks.map(&:mark).sum
@@ -91,8 +101,11 @@ module Mongoid
 
     def update_rating
       check_weighted_rate_count
+      write_attribute(:rating_previous, self.rating)
       rt = (self.rates.to_f / self.weighted_rate_count.to_f) unless self.rating_marks.blank?
       write_attribute(:rating, rt)
+      delta = (self.rating && self.previous_rating) ? rating-previous_rating : 0.0
+      write_attribute(:rating_delta, delta)      
     end
 
     def check_weighted_rate_count

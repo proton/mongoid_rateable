@@ -86,6 +86,10 @@ And you can get the average rating without weights (It calculates realtime, so i
 
     @post.unweighted_rating # rates without weights / rate_count
 
+And you can get the previous rating and delta:
+
+    @post.previous_rating
+    @post.rating_delta      # rating - previous_rating
 
 == Scopes
 
