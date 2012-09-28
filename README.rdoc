@@ -109,6 +109,7 @@ You can get posts with some rating:
     Post.with_rating(-2..2)
 
 You can get most rated and highest rated posts:
+(Sorry, this method doesn't work with embedded documents)
 
     Post.highest_rated      # 10 (or less) highest rated posts
     Post.highest_rated(5)   # 5 (or less) highest rated posts

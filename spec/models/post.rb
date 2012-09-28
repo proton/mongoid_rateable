@@ -1,7 +1,6 @@
 class Post
   include Mongoid::Document
   include Mongoid::Rateable
-
-  field :name
-
+  
+  embeds_many :comments
 end
