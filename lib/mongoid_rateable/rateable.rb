@@ -80,6 +80,11 @@ module Mongoid
       read_attribute(:weighted_rate_count)
     end
 
+    def user_mark(rater)
+      r = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
+      r ? r.mark : nil
+    end
+
     protected
 
     def validate_rating!(value)

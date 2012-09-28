@@ -70,6 +70,10 @@ And if someone rated it:
 
     @post.rated?            # True if it rated by someone
 
+You can get user mark:
+
+    @post.user_mark(@user)  # Mark or nil (if not rated by user)
+
 You can also get a tally of the number of rates cast:
 
     @post.rate_count        # Just one so far!

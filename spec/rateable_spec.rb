@@ -30,6 +30,7 @@ describe Post do
 	it { should respond_to :rating_delta }
 	it { should respond_to :unweighted_rating }
 	it { should respond_to :rating_marks }
+	it { should respond_to :user_mark }
 
 	subject { @comment1 }
 	it { should respond_to :rate }
@@ -44,6 +45,7 @@ describe Post do
 	it { should respond_to :rating_delta }
 	it { should respond_to :unweighted_rating }
 	it { should respond_to :rating_marks }
+	it { should respond_to :user_mark }
 
 	describe "#rating_marks" do
 		it "should be proper Mongoid field" do
@@ -294,6 +296,22 @@ describe Post do
 			it "should calculate the unweighted average rate if the result is zero" do
 				@comment1.rate -2, @sally
 				@comment1.unweighted_rating.should eq 0.0
+			end
+		end
+
+		describe "#user_mark" do
+			describe "for post" do
+				specify { @post.user_mark(@bob).should eq 1}
+			end
+			describe "for post" do
+				specify { @post.user_mark(@alice).should be_nil}
+			end
+
+			describe "for comment" do
+				specify { @comment1.user_mark(@bob).should eq 2}
+			end
+			describe "for comment" do
+				specify { @comment1.user_mark(@alice).should be_nil}
 			end
 		end
 	end
