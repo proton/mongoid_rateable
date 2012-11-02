@@ -57,11 +57,11 @@ describe Post do
 				@post.rates.should eql 5
 			end
 
-			it "should not raise exception if rate_value in RATING_RANGE" do
+			it "should not raise exception if rate_value in rating range" do
 				lambda { @article.rate 1, @sally }.should_not raise_error
 			end
 
-			it "should raise exception if rate_value not in RATING_RANGE" do
+			it "should raise exception if rate_value not in rating range" do
 				lambda { @article.rate 7, @sally }.should raise_error(ArgumentError)
 			end
 
@@ -510,11 +510,11 @@ describe Comment do
 				@comment1.rates.should eql 5
 			end
 
-			it "should not raise exception if rate_value in RATING_RANGE" do
+			it "should not raise exception if rate_value in rating range" do
 				lambda { @comment1.rate 1, @sally }.should_not raise_error
 			end
 
-			it "should raise exception if rate_value not in RATING_RANGE" do
+			it "should raise exception if rate_value not in rating range" do
 				lambda { @comment1.rate 9, @sally }.should raise_error(ArgumentError)
 			end
 

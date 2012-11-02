@@ -2,7 +2,7 @@ class Comment
   include Mongoid::Document
   include Mongoid::Rateable
 
-  RATING_RANGE = (-5..7)
+  set_rating_range (-5..7)
 
   embedded_in :post
 
