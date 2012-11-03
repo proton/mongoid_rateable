@@ -22,6 +22,15 @@ There are many other configurtion variants available ;)
       include Mongoid::Document
       include Mongoid::Rateable
 
+      ...
+    end
+
+or
+
+    class Post
+      include Mongoid::Document
+      include Mongoid::Rateable
+
       # class method
       def self.rating_range
         (1..5) # should always return the same range
@@ -33,6 +42,8 @@ There are many other configurtion variants available ;)
       ...
     end
 
+or
+
     class Post
       include Mongoid::Document
       include Mongoid::Rateable
@@ -40,16 +51,6 @@ There are many other configurtion variants available ;)
       # macro
       set_rating_range (1..5)
       rateable_by User, Admin
-      ...
-    end
-
-    class Post
-      include Mongoid::Document
-      include Mongoid::Rateable
-
-      # macro
-      rating_config range: (1..5), raters: User
-      
       ...
     end
 
