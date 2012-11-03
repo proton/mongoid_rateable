@@ -48,7 +48,7 @@ PLATFORMS
 DEPENDENCIES
   bundler
   database_cleaner
-  jeweler (~> 1.6.2)
+  jeweler (>= 1.6.2)
   mongoid (>= 3.0)
   rdoc
   rspec (>= 2.0.0)

@@ -20,29 +20,117 @@ module Mongoid
       scope :highest_rated, ->(limit=10) { order_by([:rating, :desc]).limit(limit) }
     end
 
-    def rate(mark, rater, weight = 1)
-      validate_rating!(mark)
-      unrate_without_rating_update(rater)
-      total_mark = mark.to_i*weight.to_i
-      self.rates += total_mark
-      self.rating_marks.new(:rater_id => rater.id, :mark => mark, :rater_class => rater.class.to_s, :weight => weight)
-      self.weighted_rate_count += weight
-      update_rating
+    module ClassMethods
+      def rater_classes
+        @rater_classes ||= []
+      end
+
+      def valid_rater_class? clazz
+        return true if !rater_classes || rater_classes.empty?
+        rater_classes.include? clazz
+      end
+
+      def in_rating_range?(value)
+        range = rating_range if respond_to?(:rating_range)
+        range ? range.include?(value.to_i) : true
+      end      
+
+      # macro to create dynamic :rating_range class method!
+      # can now even take an Array and find the range of values!
+      def set_rating_range range = nil
+        raterange = case range
+        when Array
+          arr = range.sort
+          Range.new arr.first, arr.last
+        when Range
+          range
+        else
+          raise ArgumentError, "Must be a range, was: #{range}"
+        end
+
+        (class << self; self; end).send(:define_method, :rating_range) do
+          raterange
+        end
+      end
+
+      def rateable_by *clazzes
+        @rater_classes = []
+        clazzes.each do |clazz|
+          raise ArgumentError, "A rateable must be a class, was: #{clazz}" unless clazz.respond_to?(:new)
+          @rater_classes << clazz
+        end
+      end
+
+      def rate_config options = {}
+        set_rating_range options[:range]
+        rateable_by options[:raters]
+      end
+
+      def default_rater rater=nil, &block
+        case rater
+        when Symbol, String
+          define_method :default_rater do
+            self.send(rater) # fx to use owner or user relation
+          end
+        when nil
+          raise ArgumentError, "Must take symbol or block argument" unless block_defined?
+          define_method :default_rater do
+            self.instance_eval(&block)
+          end
+        end
+      end
+    end # class methods
+
+    def rate(mark, rater = nil, weight = 1)
+      case rater
+      when Array
+        rater.each{|rater| rate(mark, rater, weight)}
+      else 
+        if !rater
+          unless respond_to?(:default_rater)
+            raise ArgumentError, "No rater argument and no default_rater specified"
+          end
+          rater = default_rater 
+        end
+        validate_rater!(rater)
+        validate_rating!(mark)
+        unrate_without_rating_update(rater)
+        total_mark = mark.to_i*weight.to_i
+        self.rates += total_mark
+        self.rating_marks.new(:rater_id => rater.id, :mark => mark, :rater_class => rater.class.to_s, :weight => weight)
+        self.weighted_rate_count += weight
+        update_rating
+      end
     end
 
     def unrate(rater)
-      unrate_without_rating_update(rater)
-      update_rating
+      case rater
+      when Array
+        rater.each{|rater| unrate(mark, rater, weight)}
+      else 
+        unrate_without_rating_update(rater)
+        update_rating
+      end
     end
 
     def rate_and_save(mark, rater, weight = 1)
-      rate(mark, rater, weight)
-      save
+      case rater
+      when Array
+        rater.each{|rater| rate_and_save(mark, rater, weight)}
+      else 
+        rate(mark, rater, weight)
+        save
+      end
     end
 
     def unrate_and_save(rater)
-      unrate(rater)
-      save
+      case rater
+      when Array
+        rater.each{|rater| unrate_and_save(mark, rater, weight)}
+      else 
+        unrate(rater)
+        save
+      end
     end
 
     def rated?
@@ -50,7 +138,12 @@ module Mongoid
     end
 
     def rated_by?(rater)
-      self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
+      case rater
+      when Array
+        rater.each{|rater| rated_by(mark, rater, weight)}
+      else       
+        self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
+      end
     end
 
     def rating
@@ -87,9 +180,15 @@ module Mongoid
 
     protected
 
+    def validate_rater!(rater)
+      unless self.class.valid_rater_class?(rater.class)
+        raise ArgumentError, "Not a valid rater: #{rater.class}, must be of one of #{self.class.rater_classes}"
+      end
+    end
+
     def validate_rating!(value)
-      if (defined? self.class::RATING_RANGE) and (range = self.class::RATING_RANGE) and !range.include?(value.to_i)
-        raise ArgumentError, "Rating not in range #{range}. Rating provided was #{value}."
+      if !self.class.in_rating_range?(value)
+        raise ArgumentError, "Rating not in range #{self.class.rating_range}. Rating provided was #{value}."
       end
     end
 

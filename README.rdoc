@@ -15,18 +15,41 @@ Add to Gemfile:
 
 == Getting Started
 
-Include the module in models where you want it:
+Include the module in models where you want it.
+There are many other configurtion variants available ;)
 
     class Post
       include Mongoid::Document
       include Mongoid::Rateable
 
-      RATING_RANGE = (1..5) # Optional (if you need restriction)
+      # class method
+      def self.rating_range
+        (1..5) # should always return the same range
+      end
+
+      # Optional restriction
+      rateable_by User
+
       ...
     end
 
-    class User
+    class Post
       include Mongoid::Document
+      include Mongoid::Rateable
+
+      # macro
+      set_rating_range (1..5)
+      rateable_by User, Admin
+      ...
+    end
+
+    class Post
+      include Mongoid::Document
+      include Mongoid::Rateable
+
+      # macro
+      rating_config range: (1..5), raters: User
+      
       ...
     end
 
@@ -41,6 +64,9 @@ You can rate by passing an integer and a rater model to the "rate" method:
     @post.rate -1, @user    # I don't like this!
     @post.rate 5, @user     # I LOVE this!
     @post.rate -10, @user   # Delete it from the Internet!
+
+    # Many users love this!
+    @post.rate 5, @users     # They LOVIN' it!
 
 Rates have weight (1 by defaut)
 
