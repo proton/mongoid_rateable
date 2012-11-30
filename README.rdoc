@@ -15,44 +15,43 @@ Add to Gemfile:
 
 == Getting Started
 
-Include the module in models where you want it.
-There are many other configurtion variants available ;)
+
+Simply use the `rateable` macro from any class that is a Mongoid Document. 
+
+This macro will include `Mongoid::Rateable` into the class and configure the rating functionality using the options hash. For any option not present, the default option value will be used.
 
     class Post
       include Mongoid::Document
-      include Mongoid::Rateable
 
-      ...
+      rateable range: (-5..7), raters: [User, Admin]
     end
 
-or
+You can also set the `default_rater`
 
     class Post
       include Mongoid::Document
-      include Mongoid::Rateable
 
-      # class method
-      def self.rating_range
-        (1..5) # should always return the same range
+      # will simply call the 'owner' method to find the default rater 
+      # if no rater given when rating
+
+      rateable range: (-5..7), raters: [User, Admin], default_rater: 'owner'
+    end
+
+    class Post
+      include Mongoid::Document
+
+      # if given a block, this will be used as a dynamic way to find 
+      # the a rater in case no rater is passed in as the 2nd argument to
+      # the rate method
+
+      rateable range: (-5..7), raters: [User, Admin] do
+        # will by default be rated by the last user 
+        # who made a comment to this post!
+        comments.last.user
       end
-
-      # Optional restriction
-      rateable_by User
-
-      ...
     end
 
-or
-
-    class Post
-      include Mongoid::Document
-      include Mongoid::Rateable
-
-      # macro
-      set_rating_range (1..5)
-      rateable_by User, Admin
-      ...
-    end
+Note: For even more control over the configuration, see the `ClassMethods` module code in `rateable.rb`.
 
 == Cast Rates
 
