@@ -2,6 +2,20 @@ module Mongoid
   module Rateable
     extend ActiveSupport::Concern
 
+    module Ext
+      extend ActiveSupport::Concern
+
+      module ClassMethods
+        def rateable options = {}
+          class_eval do            
+            self.send :include, Mongoid::Rateable
+            puts "options: #{options}"
+            self.rate_config options
+          end
+        end
+      end
+    end
+
     included do
       field :rates, type: Integer, default: 0
       field :rating, type: Float, default: nil
@@ -44,6 +58,8 @@ module Mongoid
           Range.new arr.first, arr.last
         when Range
           range
+        when nil
+          (1..5)
         else
           raise ArgumentError, "Must be a range, was: #{range}"
         end
@@ -55,15 +71,17 @@ module Mongoid
 
       def rateable_by *clazzes
         @rater_classes = []
+        return if clazzes.compact.empty?
         clazzes.each do |clazz|
           raise ArgumentError, "A rateable must be a class, was: #{clazz}" unless clazz.respond_to?(:new)
           @rater_classes << clazz
         end
       end
 
-      def rate_config options = {}
+      def rate_config options = {}, &block
         set_rating_range options[:range]
         rateable_by options[:raters]
+        default_rater options[:default_rater], &block
       end
 
       def default_rater rater=nil, &block
@@ -73,10 +91,12 @@ module Mongoid
             self.send(rater) # fx to use owner or user relation
           end
         when nil
-          raise ArgumentError, "Must take symbol or block argument" unless block_defined?
+          return unless block_given?
           define_method :default_rater do
             self.instance_eval(&block)
           end
+        else
+          raise ArgumentError, "Must take symbol or block argument" 
         end
       end
     end # class methods
