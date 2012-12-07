@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mongoid_rateable"
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Savichev (proton)"]
-  s.date = "2012-11-03"
+  s.date = "2012-12-07"
   s.description = "Provides fields and methods for the rating manipulation on Mongoid documents."
   s.email = "psavichev@gmail.com"
   s.extra_rdoc_files = [
