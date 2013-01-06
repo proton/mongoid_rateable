@@ -57,24 +57,15 @@ describe Post do
 				@post.rates.should eql 5
 			end
 
-			it "should not raise exception if rate_value in rating range" do
-				lambda { @article.rate 1, @sally }.should_not raise_error
-			end
+			it { expect { @article.rate 1, @sally }.not_to raise_error }
 
-			it "should raise exception if rate_value not in rating range" do
-				lambda { @article.rate 7, @sally }.should raise_error(ArgumentError)
-			end
+			it { expect { @article.rate 7, @sally }.to raise_error(ArgumentError) }
 
-			#TODO: Rewrite for random values
 			describe "when using negative values" do
-				it "should work properly for -3" do
-					@post.rate -3, @sally
-					@post.rates.should eql -2
-				end
-				it "should work properly for -1 with weight 3" do
-					@post.rate -1, @sally, 3
-					@post.rates.should eql -2
-				end
+				let(:num) { -rand(1..100) }
+
+				it { expect { @post.rate num, @sally }.to change { @post.rates }.by(num) }
+				it { expect { @post.rate -1, @sally, -num }.to change { @post.rates }.by(num) }
 			end
 		end
 
@@ -510,24 +501,15 @@ describe Comment do
 				@comment1.rates.should eql 5
 			end
 
-			it "should not raise exception if rate_value in rating range" do
-				lambda { @comment1.rate 1, @sally }.should_not raise_error
-			end
+			it { expect { @comment1.rate 1, @sally }.not_to raise_error }
 
-			it "should raise exception if rate_value not in rating range" do
-				lambda { @comment1.rate 9, @sally }.should raise_error(ArgumentError)
-			end
+			it { expect { @comment1.rate 9, @sally }.to raise_error(ArgumentError) }
 
-			#TODO: Rewrite for random values
 			describe "when using negative values" do
-				it "should work properly for -3" do
-					@comment1.rate -3, @sally
-					@comment1.rates.should eql -1
-				end
-				it "should work properly for -1 with weight 3" do
-					@comment1.rate -1, @sally, 3
-					@comment1.rates.should eql -1
-				end
+				let(:num) { -rand(1..5) }
+
+				it { expect { @comment1.rate num, @sally }.to change { @comment1.rates }.by(num) }
+				it { expect { @comment1.rate -1, @sally, -num }.to change { @comment1.rates }.by(num) }
 			end
 		end
 
