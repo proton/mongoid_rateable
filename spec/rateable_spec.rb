@@ -57,9 +57,13 @@ describe Post do
 				@post.rates.should eql 5
 			end
 
-			it { expect { @article.rate 1, @sally }.not_to raise_error }
+			context "when rate_value in rating range" do
+				it { expect { @article.rate 1, @sally }.not_to raise_error }
+			end
 
-			it { expect { @article.rate 7, @sally }.to raise_error(ArgumentError) }
+			context "when rate_value not in rating range" do
+				it { expect { @article.rate 7, @sally }.to raise_error(ArgumentError) }
+			end
 
 			describe "when using negative values" do
 				let(:num) { -rand(1..100) }
@@ -501,9 +505,13 @@ describe Comment do
 				@comment1.rates.should eql 5
 			end
 
-			it { expect { @comment1.rate 1, @sally }.not_to raise_error }
-
-			it { expect { @comment1.rate 9, @sally }.to raise_error(ArgumentError) }
+			context "when rate_value in rating range" do
+				it { expect { @comment1.rate 1, @sally }.not_to raise_error }
+			end
+			
+			context "when rate_value not in rating range" do
+				it { expect { @comment1.rate 9, @sally }.to raise_error(ArgumentError) }
+			end
 
 			describe "when using negative values" do
 				let(:num) { -rand(1..5) }
