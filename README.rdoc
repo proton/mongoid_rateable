@@ -7,6 +7,11 @@ Provides fields and methods for the *rating* manipulation on Mongoid documents
 Lastest version of Mongoid:Rateable requires mongoid 3.
 If you need a mongoid 2 support, look at mongoid_rateable 0.1.7.
 
+== Support us
+
+
+{<img src="http://api.flattr.com/button/flattr-badge-large.png" />}[https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/mongoid_rateable/&title=MongoidRateable&language=&tags=github&category=software]
+
 == Installation
 
 Add to Gemfile:
