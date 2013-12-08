@@ -194,6 +194,7 @@ module Mongoid
     end
 
     def user_mark(rater)
+      logger.info(rater.class)
       case rater
       when Array
         if rater.map{|x| x.class}.uniq.count > 1
@@ -201,7 +202,7 @@ module Mongoid
             return
         end
         r = self.rating_marks.in(:rater_id => rater.map(&:id), :rater_class => rater.first.class.to_s)
-        r ? r.inject(Hash.new(0)) { |h, e| h[e.rater_id] = mark ; h } : nil
+        r ? r.inject(Hash.new(0)) { |h, e| h[e.rater_id] = e.mark ; h } : nil
         
       else       
         r = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
