@@ -1,2 +1,2 @@
 rvm_gemset_create_on_use_flag=1
-rvm use 1.9.3@mongoid_rateable
+rvm use 2.0.0@mongoid_rateable

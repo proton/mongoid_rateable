@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "mongoid", ">= 3.0"
+gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
 group :development do
   gem "bundler"
