@@ -3,9 +3,9 @@ require "spec_helper"
 describe Post do
 
 	before(:each) do
-		@bob = User.create :name => "Bob"
-		@alice = User.create :name => "Alice"
-		@sally = User.create :name => "Sally"
+		@bob = User.create :id => 1, :name => "Bob"
+		@alice = User.create :id => 2, :name => "Alice"
+		@sally = User.create :id => 3, :name => "Sally"
 		@post = Post.create :name => "Announcement"
 		@article = Article.create :name => "Article"
 	end
@@ -183,6 +183,9 @@ describe Post do
 			end
 			describe "should give nil" do
 				specify { @post.user_mark(@alice).should be_nil}
+			end
+			describe "should give marks" do
+				specify { @post.user_mark([@bob, @alice]).should eq Hash[1,1] }
 			end
 		end
 	end
