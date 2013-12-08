@@ -194,7 +194,6 @@ module Mongoid
     end
 
     def user_mark(rater)
-      logger.info(rater.class)
       case rater
       when Array
         if rater.map{|x| x.class}.uniq.count > 1
