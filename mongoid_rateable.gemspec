@@ -12,68 +12,13 @@ Gem::Specification.new do |s|
   s.date = "2012-12-07"
   s.description = "Provides fields and methods for the rating manipulation on Mongoid documents."
   s.email = "psavichev@gmail.com"
-  s.extra_rdoc_files = [
-    "LICENSE.txt",
-    "README.rdoc",
-    "TODO"
-  ]
-  s.files = [
-    ".rspec",
-    ".rvmrc",
-    "CHANGELOG.md",
-    "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
-    "README.rdoc",
-    "Rakefile",
-    "TODO",
-    "VERSION",
-    "lib/mongoid_rateable.rb",
-    "lib/mongoid_rateable/rateable.rb",
-    "lib/mongoid_rateable/rating.rb",
-    "lib/mongoid_rateable/version.rb",
-    "mongoid_rateable.gemspec",
-    "spec/models/article.rb",
-    "spec/models/comment.rb",
-    "spec/models/post.rb",
-    "spec/models/user.rb",
-    "spec/rateable_spec.rb",
-    "spec/spec_helper.rb"
-  ]
+  s.files = `git ls-files`.split($\)
   s.homepage = "http://github.com/proton/mongoid_rateable"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.18"
   s.summary = "Rating functionality for Mongoid documents"
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<mongoid>, [">= 3.0"])
-      s.add_development_dependency(%q<bundler>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, [">= 1.6.2"])
-      s.add_development_dependency(%q<simplecov>, [">= 0.4.0"])
-      s.add_development_dependency(%q<rdoc>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, [">= 2.0.0"])
-      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
-    else
-      s.add_dependency(%q<mongoid>, [">= 3.0"])
-      s.add_dependency(%q<bundler>, [">= 0"])
-      s.add_dependency(%q<jeweler>, [">= 1.6.2"])
-      s.add_dependency(%q<simplecov>, [">= 0.4.0"])
-      s.add_dependency(%q<rdoc>, [">= 0"])
-      s.add_dependency(%q<rspec>, [">= 2.0.0"])
-      s.add_dependency(%q<database_cleaner>, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<mongoid>, [">= 3.0"])
-    s.add_dependency(%q<bundler>, [">= 0"])
-    s.add_dependency(%q<jeweler>, [">= 1.6.2"])
-    s.add_dependency(%q<simplecov>, [">= 0.4.0"])
-    s.add_dependency(%q<rdoc>, [">= 0"])
-    s.add_dependency(%q<rspec>, [">= 2.0.0"])
-    s.add_dependency(%q<database_cleaner>, [">= 0"])
-  end
+  s.add_runtime_dependency('mongoid', "~> 4.0.alpha")
 end
 
