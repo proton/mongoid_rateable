@@ -23,7 +23,7 @@ module Mongoid
       field :rating_delta, type: Float, default: 0.0
       field :weighted_rate_count, type: Integer, default: 0
 
-      embeds_many :rating_marks, :as => :rateable
+      embeds_many :rating_marks, :as => :rateable, cascade_callbacks: true
 
       index({"rating_marks.rater_id" => 1, "rating_marks.rater_class" => 1})
 
