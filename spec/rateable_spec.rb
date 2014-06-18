@@ -268,6 +268,10 @@ describe Post do
 		describe "#unweighted_rating" do
 			specify { @f_post.unweighted_rating.should eq -1.0 }
 		end
+
+		describe "rating timestamps" do
+			specify { @f_post.rating_marks.first.created_at.should_not be_nil }
+		end
 	end
 
 	describe "#rate_and_save" do
