@@ -9,7 +9,6 @@ module Mongoid
         def rateable options = {}
           class_eval do            
             self.send :include, Mongoid::Rateable
-            puts "options: #{options}"
             self.rate_config options
           end
         end
