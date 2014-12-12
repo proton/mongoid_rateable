@@ -4,7 +4,7 @@ Provides fields and methods for the *rating* manipulation on Mongoid documents
 
 {<img src="https://secure.travis-ci.org/proton/mongoid_rateable.png" />}[http://travis-ci.org/proton/mongoid_rateable]
 
-Lastest version of Mongoid:Rateable requires mongoid 3.
+Latest version of Mongoid:Rateable requires mongoid 3.
 If you need a mongoid 2 support, look at mongoid_rateable 0.1.7.
 
 == Support us
@@ -73,7 +73,7 @@ You can rate by passing an integer and a rater model to the "rate" method:
     # Many users love this!
     @post.rate 5, @users     # They LOVIN' it!
 
-Rates have weight (1 by defaut)
+Rates have weight (1 by default)
 
     @post.rate 5, @user, 3     # Rate @post with weight 3 (@user has high karma)
     @post.rate 3, @user, 1     # Rate @post with weight 1 (@user has low karma)
@@ -86,7 +86,7 @@ And don't forget to save rateable object:
 
     @post.save
 
-Sure, you can rate and save in one fuction:
+Sure, you can rate and save in one function:
 
     @post.rate_and_save(3, @user)
     @post.unrate_and_save(@user)
