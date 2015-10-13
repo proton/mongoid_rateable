@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gemspec
+gem 'mongoid', '~> 5.0'
 
 gem 'rake', '~> 10.0'
 

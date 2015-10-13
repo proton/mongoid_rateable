@@ -1,1 +1,15 @@
-services: mongodb
+language: ruby
+rvm:
+  - 2.0.0
+  - 2.1.0
+  - 2.2.0
+  - ruby-head
+  - jruby
+  - jruby-head
+gemfile:
+  - gemfiles/Gemfile.mongoid-4.0
+  - gemfiles/Gemfile.mongoid-5.0
+  - Gemfile
+services:
+  - mongodb
+sudo: false

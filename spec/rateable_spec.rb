@@ -12,7 +12,7 @@ describe Post do
 
 	it "should have Mongoid::Rateable module" do
 		#TODO: Refactor this
-		@post.class.const_get("Mongoid").const_get("Rateable").should be_true
+		@post.class.const_get("Mongoid").const_get("Rateable").should_not be nil
 	end
 
 	subject { @post }
@@ -75,17 +75,17 @@ describe Post do
 
 		describe "#rated?" do
 			describe "for anyone" do
-				specify { @post.rated?().should be_true }
+				specify { @post.rated?().should be true }
 			end
 			describe "for anyone" do
-				specify { @article.rated?().should be_false }
+				specify { @article.rated?().should be false }
 			end
 
 			describe "for Bob" do
-				specify { @post.rated_by?(@bob).should be_true }
+				specify { @post.rated_by?(@bob).should be true }
 			end
 			describe "for Bob" do
-				specify { @article.rated_by?(@bob).should be_false }
+				specify { @article.rated_by?(@bob).should be false }
 			end
 
 			describe "when rated by someone else" do
@@ -94,13 +94,13 @@ describe Post do
 				end
 
 				describe "for Alice" do
-					specify { @post.rated_by?(@alice).should be_true }
+					specify { @post.rated_by?(@alice).should be true }
 				end
 			end
 
 			describe "when not rated by someone else" do
 				describe "for Sally" do
-					specify { @post.rated_by?(@sally).should be_false }
+					specify { @post.rated_by?(@sally).should be false }
 				end
 			end
 		end
@@ -117,7 +117,7 @@ describe Post do
 			end
 
 			it "should be unrated" do
-				@post.rated?.should be_false
+				@post.rated?.should be false
 			end
 		end
 
@@ -236,15 +236,15 @@ describe Post do
 
 		describe "#rated_by?" do
 			describe "for Bob" do
-				specify { @f_post.rated_by?(@bob).should be_true }
+				specify { @f_post.rated_by?(@bob).should be true }
 			end
 
 			describe "for Sally" do
-				specify { @f_post.rated_by?(@sally).should be_true }
+				specify { @f_post.rated_by?(@sally).should be true }
 			end
 
 			describe "for Alice" do
-				specify { @f_post.rated_by?(@alice).should be_false}
+				specify { @f_post.rated_by?(@alice).should be false}
 			end
 		end
 
@@ -282,15 +282,15 @@ describe Post do
 
 		describe "#rated?" do
 			it "should be #rated? by Bob" do
-				@f_post.rated_by?(@bob).should be_true
+				@f_post.rated_by?(@bob).should be true
 			end
 
 			it "should be #rated? by Sally" do
-				@f_post.rated_by?(@sally).should be_true
+				@f_post.rated_by?(@sally).should be true
 			end
 
 			it "should be not #rated? by Alice" do
-				@f_post.rated_by?(@alice).should be_false
+				@f_post.rated_by?(@alice).should be false
 			end
 		end
 
@@ -330,15 +330,15 @@ describe Post do
 
 			describe "#rated?" do
 				it "should be #rated? by Sally" do
-					@f_post.rated_by?(@sally).should be_true
+					@f_post.rated_by?(@sally).should be true
 				end
 
 				it "should be not #rated? by Bob" do
-					@f_post.rated_by?(@bob).should be_false
+					@f_post.rated_by?(@bob).should be false
 				end
 
 				it "should be #rated?" do
-					@f_post.rated?.should be_true
+					@f_post.rated?.should be true
 				end
 			end
 
@@ -463,7 +463,7 @@ describe Comment do
 
 	it "should have Mongoid::Rateable module" do
 		#TODO: Refactor this
-		@comment1.class.const_get("Mongoid").const_get("Rateable").should be_true
+		@comment1.class.const_get("Mongoid").const_get("Rateable").should_not be nil
 	end
 
 	subject { @comment1 }
@@ -511,7 +511,7 @@ describe Comment do
 			context "when rate_value in rating range" do
 				it { expect { @comment1.rate 1, @sally }.not_to raise_error }
 			end
-			
+
 			context "when rate_value not in rating range" do
 				it { expect { @comment1.rate 9, @sally }.to raise_error(ArgumentError) }
 			end
@@ -526,17 +526,17 @@ describe Comment do
 
 		describe "#rated?" do
 			describe "for anyone" do
-				specify { @comment1.rated?().should be_true }
+				specify { @comment1.rated?().should be true }
 			end
 			describe "for anyone" do
-				specify { @comment2.rated?().should be_false }
+				specify { @comment2.rated?().should be false }
 			end
 
 			describe "for Bob" do
-				specify { @comment1.rated_by?(@bob).should be_true }
+				specify { @comment1.rated_by?(@bob).should be true }
 			end
 			describe "for Bob" do
-				specify { @comment2.rated_by?(@bob).should be_false }
+				specify { @comment2.rated_by?(@bob).should be false }
 			end
 
 			describe "when rated by someone else" do
@@ -545,13 +545,13 @@ describe Comment do
 				end
 
 				describe "for Alice" do
-					specify { @comment1.rated_by?(@alice).should be_true }
+					specify { @comment1.rated_by?(@alice).should be true }
 				end
 			end
 
 			describe "when not rated by someone else" do
 				describe "for Sally" do
-					specify { @comment1.rated_by?(@sally).should be_false }
+					specify { @comment1.rated_by?(@sally).should be false }
 				end
 			end
 		end
@@ -568,7 +568,7 @@ describe Comment do
 			end
 
 			it "should be unrated" do
-				@comment1.rated?.should be_false
+				@comment1.rated?.should be false
 			end
 		end
 
@@ -685,15 +685,15 @@ describe Comment do
 
 		describe "#rated_by?" do
 			describe "for Bob" do
-				specify { @f_comment.rated_by?(@bob).should be_true }
+				specify { @f_comment.rated_by?(@bob).should be true }
 			end
 
 			describe "for Sally" do
-				specify { @f_comment.rated_by?(@sally).should be_true }
+				specify { @f_comment.rated_by?(@sally).should be true }
 			end
 
 			describe "for Alice" do
-				specify { @f_comment.rated_by?(@alice).should be_false}
+				specify { @f_comment.rated_by?(@alice).should be false}
 			end
 		end
 
@@ -732,15 +732,15 @@ describe Comment do
 
 		describe "#rated?" do
 			it "should be #rated? by Bob" do
-				@f_comment.rated_by?(@bob).should be_true
+				@f_comment.rated_by?(@bob).should be true
 			end
 
 			it "should be #rated? by Sally" do
-				@f_comment.rated_by?(@sally).should be_true
+				@f_comment.rated_by?(@sally).should be true
 			end
 
 			it "should be not #rated? by Alice" do
-				@f_comment.rated_by?(@alice).should be_false
+				@f_comment.rated_by?(@alice).should be false
 			end
 		end
 
@@ -781,15 +781,15 @@ describe Comment do
 
 			describe "#rated?" do
 				it "should be #rated? by Sally" do
-					@f_comment.rated_by?(@sally).should be_true
+					@f_comment.rated_by?(@sally).should be true
 				end
 
 				it "should be not #rated? by Bob" do
-					@f_comment.rated_by?(@bob).should be_false
+					@f_comment.rated_by?(@bob).should be false
 				end
 
 				it "should be #rated?" do
-					@f_comment.rated?.should be_true
+					@f_comment.rated?.should be true
 				end
 			end
 
