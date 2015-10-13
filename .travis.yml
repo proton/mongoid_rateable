@@ -7,8 +7,8 @@ rvm:
   - jruby
   - jruby-head
 gemfile:
-  - gemfiles/Gemfile.mongoid-4.0
-  - gemfiles/Gemfile.mongoid-5.0
+  - gemfiles/Gemfile.mongoid-4
+  - gemfiles/Gemfile.mongoid-5
   - Gemfile
 services:
   - mongodb
