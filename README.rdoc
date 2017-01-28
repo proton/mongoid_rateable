@@ -4,7 +4,7 @@ Provides fields and methods for the *rating* manipulation on Mongoid documents
 
 {<img src="https://secure.travis-ci.org/proton/mongoid_rateable.png" />}[http://travis-ci.org/proton/mongoid_rateable]
 
-Latest version of Mongoid:Rateable requires mongoid 3.
+Lastest version of Mongoid:Rateable requires mongoid 3, 4, 5 and 6
 If you need a mongoid 2 support, look at mongoid_rateable 0.1.7.
 
 == Support us
@@ -21,7 +21,7 @@ Add to Gemfile:
 == Getting Started
 
 
-Simply use the `rateable` macro from any class that is a Mongoid Document. 
+Simply use the `rateable` macro from any class that is a Mongoid Document.
 
 This macro will include `Mongoid::Rateable` into the class and configure the rating functionality using the options hash. For any option not present, the default option value will be used.
 
@@ -36,7 +36,7 @@ You can also set the `default_rater`
     class Post
       include Mongoid::Document
 
-      # will simply call the 'owner' method to find the default rater 
+      # will simply call the 'owner' method to find the default rater
       # if no rater given when rating
 
       rateable range: (-5..7), raters: [User, Admin], default_rater: 'owner'
@@ -45,12 +45,12 @@ You can also set the `default_rater`
     class Post
       include Mongoid::Document
 
-      # if given a block, this will be used as a dynamic way to find 
+      # if given a block, this will be used as a dynamic way to find
       # the a rater in case no rater is passed in as the 2nd argument to
       # the rate method
 
       rateable range: (-5..7), raters: [User, Admin] do
-        # will by default be rated by the last user 
+        # will by default be rated by the last user
         # who made a comment to this post!
         comments.last.user
       end

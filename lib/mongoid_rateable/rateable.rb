@@ -7,7 +7,7 @@ module Mongoid
 
       module ClassMethods
         def rateable options = {}
-          class_eval do            
+          class_eval do
             self.send :include, Mongoid::Rateable
             self.rate_config options
           end
@@ -26,8 +26,8 @@ module Mongoid
 
       index({"rating_marks.rater_id" => 1, "rating_marks.rater_class" => 1})
 
-      scope :unrated, where(:rating.exists => false)
-      scope :rated, where(:rating.exists => true)
+      scope :unrated, -> { where(:rating.exists => false) }
+      scope :rated, -> { where(:rating.exists => true) }
       scope :rated_by, ->(rater) { where("rating_marks.rater_id" => rater.id, "rating_marks.rater_class" => rater.class.to_s) }
       scope :with_rating, ->(range) { where(:rating.gte => range.begin, :rating.lte => range.end) }
       scope :highest_rated, ->(limit=10) { order_by([:rating, :desc]).limit(limit) }
@@ -46,7 +46,7 @@ module Mongoid
       def in_rating_range?(value)
         range = rating_range if respond_to?(:rating_range)
         range ? range.include?(value.to_i) : true
-      end      
+      end
 
       # macro to create dynamic :rating_range class method!
       # can now even take an Array and find the range of values!
@@ -95,7 +95,7 @@ module Mongoid
             self.instance_eval(&block)
           end
         else
-          raise ArgumentError, "Must take symbol or block argument" 
+          raise ArgumentError, "Must take symbol or block argument"
         end
       end
     end # class methods
@@ -104,12 +104,12 @@ module Mongoid
       case rater
       when Array
         rater.each{|rater| rate(mark, rater, weight)}
-      else 
+      else
         if !rater
           unless respond_to?(:default_rater)
             raise ArgumentError, "No rater argument and no default_rater specified"
           end
-          rater = default_rater 
+          rater = default_rater
         end
         validate_rater!(rater)
         validate_rating!(mark)
@@ -126,7 +126,7 @@ module Mongoid
       case rater
       when Array
         rater.each{|rater| unrate(mark, rater, weight)}
-      else 
+      else
         unrate_without_rating_update(rater)
         update_rating
       end
@@ -136,7 +136,7 @@ module Mongoid
       case rater
       when Array
         rater.each{|rater| rate_and_save(mark, rater, weight)}
-      else 
+      else
         rate(mark, rater, weight)
         save
       end
@@ -146,7 +146,7 @@ module Mongoid
       case rater
       when Array
         rater.each{|rater| unrate_and_save(mark, rater, weight)}
-      else 
+      else
         unrate(rater)
         save
       end
@@ -160,7 +160,7 @@ module Mongoid
       case rater
       when Array
         rater.each{|rater| rated_by(mark, rater, weight)}
-      else       
+      else
         self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).count == 1
       end
     end
@@ -193,8 +193,19 @@ module Mongoid
     end
 
     def user_mark(rater)
-      r = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
-      r ? r.mark : nil
+      case rater
+      when Array
+        if rater.map{|x| x.class}.uniq.count > 1
+            raise ArgumentError, "Raters all must be of same class."
+            return
+        end
+        r = self.rating_marks.in(:rater_id => rater.map(&:id), :rater_class => rater.first.class.to_s)
+        r ? r.inject(Hash.new(0)) { |h, e| h[e.rater_id] = e.mark ; h } : nil
+
+      else
+        r = self.rating_marks.where(:rater_id => rater.id, :rater_class => rater.class.to_s).first
+        r ? r.mark : nil
+      end
     end
 
     protected
@@ -228,7 +239,7 @@ module Mongoid
       rt = (self.rates.to_f / self.weighted_rate_count.to_f) unless self.rating_marks.blank?
       write_attribute(:rating, rt)
       delta = (self.rating && self.previous_rating) ? rating-previous_rating : 0.0
-      write_attribute(:rating_delta, delta)      
+      write_attribute(:rating_delta, delta)
     end
 
     def check_weighted_rate_count

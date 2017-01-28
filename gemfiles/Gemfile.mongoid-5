@@ -1,8 +1,10 @@
 source "http://rubygems.org"
 
-gemspec
+gem 'mongoid', '~> 5.0'
 
-group :development do
+gem 'rake', '~> 10.0'
+
+group :test do
   gem "bundler"
   gem "simplecov", '~> 0.7', :require => false
   gem "yard"
