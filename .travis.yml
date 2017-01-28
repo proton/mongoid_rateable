@@ -7,9 +7,10 @@ rvm:
   - jruby
   - jruby-head
 gemfile:
-  - gemfiles/Gemfile.mongoid-4
-  - gemfiles/Gemfile.mongoid-5
-  - Gemfile
+  - gemfiles/mongoid_3.gemfile
+  - gemfiles/mongoid_4.gemfile
+  - gemfiles/mongoid_5.gemfile
+  - gemfiles/mongoid_6.gemfile
 services:
   - mongodb
 sudo: false

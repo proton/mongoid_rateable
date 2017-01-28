@@ -5,11 +5,7 @@ require File.expand_path('../lib/mongoid_rateable/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "mongoid_rateable"
-<<<<<<< HEAD
-  s.version = "0.3.3"
-=======
   s.version = MongoidRateable::VERSION
->>>>>>> e440a5509a145f838a97c0e97f18b9088aa80a8d
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
@@ -17,7 +13,6 @@ Gem::Specification.new do |s|
   s.date = "2014-06-21"
   s.description = "Provides fields and methods for the rating manipulation on Mongoid documents."
   s.email = "psavichev@gmail.com"
-<<<<<<< HEAD
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc",
@@ -47,15 +42,11 @@ Gem::Specification.new do |s|
     "spec/rateable_spec.rb",
     "spec/spec_helper.rb"
   ]
-=======
-  s.files = `git ls-files`.split($\)
->>>>>>> e440a5509a145f838a97c0e97f18b9088aa80a8d
   s.homepage = "http://github.com/proton/mongoid_rateable"
   s.licenses = ["MIT"]
   s.rubygems_version = "2.2.2"
   s.summary = "Rating functionality for Mongoid documents"
 
-<<<<<<< HEAD
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
@@ -85,8 +76,5 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rspec>, ["~> 2.0"])
     s.add_dependency(%q<database_cleaner>, ["~> 0"])
   end
-=======
-  s.add_dependency('mongoid', '>= 4.0')
->>>>>>> e440a5509a145f838a97c0e97f18b9088aa80a8d
 end
 

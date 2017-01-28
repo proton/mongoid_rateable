@@ -7,30 +7,39 @@ require 'rubygems'
 require 'mongoid'
 require 'mongoid_rateable'
 require 'simplecov'
+require 'database_cleaner'
 require 'coveralls'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
   Coveralls::SimpleCov::Formatter
-]
+])
 SimpleCov.start
 
-if Mongoid::VERSION.start_with? '5'
-  Mongo::Logger.logger.level = ::Logger::FATAL
-elsif Mongoid::VERSION.start_with? '4'
-  Moped.logger = nil
+Mongoid.configure do |config|
+  config.connect_to "mongoid_rateable_test"
 end
 
-require_relative 'support/database_cleaner'
+Mongoid.logger = Logger.new($stdout)
+
+if Mongoid::VERSION>'5'
+  Mongo::Logger.logger.level = ::Logger::FATAL
+end
 
 Dir["#{MODELS}/*.rb"].each { |f| require f }
 
-Mongoid.configure do |config|
-  config.connect_to 'mongoid_rateable_test'
-end
+DatabaseCleaner.orm = "mongoid"
 
 RSpec.configure do |config|
+  config.before(:all) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
   config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
     DatabaseCleaner.clean
   end
 end
