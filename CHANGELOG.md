@@ -1,5 +1,9 @@
 # Changelog
 
+*0.4.0*
+
+Add Mongoid 4,5,6 support
+
 *0.3.0*
 
 Removed RATING_RANGE constant.
