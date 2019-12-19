@@ -16,7 +16,4 @@ gemfile:
   - gemfiles/mongoid_7.gemfile
 services:
   - mongodb
-script:
-  - bundle exec rspec
-  - bundle exec rubocop
 sudo: false
