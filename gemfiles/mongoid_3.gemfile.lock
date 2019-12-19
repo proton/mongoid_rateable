@@ -114,6 +114,3 @@ DEPENDENCIES
   rspec (>= 3.0.0)
   simplecov (~> 0.7)
   yard
-
-BUNDLED WITH
-   1.14.3
