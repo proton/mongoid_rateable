@@ -4,7 +4,7 @@ Provides fields and methods for the *rating* manipulation on Mongoid documents
 
 {<img src="https://secure.travis-ci.org/proton/mongoid_rateable.png" />}[http://travis-ci.org/proton/mongoid_rateable]
 
-Lastest version of Mongoid:Rateable requires mongoid 3, 4, 5 and 6.
+Lastest version of Mongoid:Rateable requires mongoid 3, 4, 5, 6 and 7.
 
 If you need a mongoid 2 support, look at mongoid_rateable 0.1.7.
 
