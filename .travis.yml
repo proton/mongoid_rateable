@@ -1,19 +1,20 @@
 language: ruby
 before_install: gem update bundler
 rvm:
-  - 2.2.2
+  # - 2.0.0
+  # - 2.1.0
+  # - 2.2.2
   - 2.3.0
   - 2.4.0
   - 2.5.0
   - 2.6.0
   - ruby-head
   - jruby
-  - jruby-head
 gemfile:
-  - gemfiles/mongoid_3.gemfile
-  - gemfiles/mongoid_4.gemfile
-  - gemfiles/mongoid_5.gemfile
-  - gemfiles/mongoid_6.gemfile
+  # - gemfiles/mongoid_3.gemfile
+  # - gemfiles/mongoid_4.gemfile
+  # - gemfiles/mongoid_5.gemfile
+  # - gemfiles/mongoid_6.gemfile
   - gemfiles/mongoid_7.gemfile
 services:
   - mongodb
@@ -21,7 +22,5 @@ sudo: false
 
 allow_failures:
   - rvm:
-    - 2.2.2
-    - 2.3.0
     - ruby-head
-    - jruby-head
+    - jruby
