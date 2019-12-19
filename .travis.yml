@@ -8,8 +8,6 @@ rvm:
   - 2.4.0
   - 2.5.0
   - 2.6.0
-  - ruby-head
-  - jruby
 gemfile:
   # - gemfiles/mongoid_3.gemfile
   # - gemfiles/mongoid_4.gemfile
@@ -18,9 +16,7 @@ gemfile:
   - gemfiles/mongoid_7.gemfile
 services:
   - mongodb
+script:
+  - bundle exec rspec
+  - bundle exec rubocop
 sudo: false
-
-allow_failures:
-  - rvm:
-    - ruby-head
-    - jruby
