@@ -106,7 +106,6 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal
-  bundler
   coveralls
   database_cleaner (>= 0.8.0)
   jeweler (~> 2.1.1)
