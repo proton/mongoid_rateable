@@ -106,6 +106,7 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal
+  bundler
   coveralls
   database_cleaner (>= 0.8.0)
   jeweler (~> 2.1.1)
@@ -113,6 +114,3 @@ DEPENDENCIES
   rspec (>= 3.0.0)
   simplecov (~> 0.7)
   yard
-
-BUNDLED WITH
-   1.14.3
