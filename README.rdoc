@@ -11,7 +11,7 @@ If you need a mongoid 2 support, look at mongoid_rateable 0.1.7.
 == Support us
 
 
-{<img src="http://api.flattr.com/button/flattr-badge-large.png" />}[https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/mongoid_rateable/&title=MongoidRateable&language=&tags=github&category=software]
+{<img src="http://api.flattr.com/button/flattr-badge-large.png" />}[https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/mongoid_rateable/&title=MongoidRateable&language=&tags=github&category=software] or https://www.patreon.com/_proton
 
 == Installation
 
