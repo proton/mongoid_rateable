@@ -12,4 +12,3 @@ group :development do
   gem 'coveralls', require: false
   gem 'database_cleaner-mongoid', '~> 2.0', '>= 2.0.1'
 end
-

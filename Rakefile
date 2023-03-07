@@ -22,7 +22,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %q{Rating functionality for Mongoid documents}
   gem.description = %q{Provides fields and methods for the rating manipulation on Mongoid documents.}
   gem.email = "psavichev@gmail.com"
-  gem.authors = ["Peter Savichev (proton)"]
+  gem.authors = ["Petr Savichev (proton)"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
