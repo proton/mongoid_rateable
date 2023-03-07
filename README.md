@@ -5,16 +5,13 @@ documents
 
 [![travis CI](https://secure.travis-ci.org/proton/mongoid_rateable.png)](http://travis-ci.org/proton/mongoid_rateable)
 
-Lastest version of Mongoid:Rateable requires mongoid 3, 4, 5, 6 and 7.
+Lastest version of Mongoid:Rateable requires mongoid 3, 4, 5, 6, 7 and 8.
 
 If you need a mongoid 2 support, look at mongoid_rateable 0.1.7.
 
 ## Support us
 
-[<img src="http://api.flattr.com/button/flattr-badge-large.png"
-/>](https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proto
-n/mongoid_rateable/&title=MongoidRateable&language=&tags=github&category=softw
-are) or https://www.patreon.com/_proton
+https://www.patreon.com/_proton
 
 ## Installation
 
@@ -178,5 +175,5 @@ work with embedded documents)
 
 ## Copyright
 
-Copyright (c) 2011 Peter Savichev (proton). See LICENSE.txt for further
+Copyright (c) 2011-2023 Petr Savichev (proton). See LICENSE.txt for further
 details.

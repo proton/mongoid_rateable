@@ -10,6 +10,6 @@ group :development do
   gem 'rspec', '>= 3.0.0'
   gem 'appraisal'
   gem 'coveralls', require: false
-  gem 'database_cleaner', '>= 0.8.0'
+  gem 'database_cleaner-mongoid', '~> 2.0', '>= 2.0.1'
 end
 

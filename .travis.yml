@@ -9,12 +9,16 @@ rvm:
   - 2.5.0
   - 2.6.0
   - 2.7.0
+  - 3.0.0
+  - 3.1.0
+  - 3.2.0
 gemfile:
   # - gemfiles/mongoid_3.gemfile
   # - gemfiles/mongoid_4.gemfile
   # - gemfiles/mongoid_5.gemfile
   # - gemfiles/mongoid_6.gemfile
   - gemfiles/mongoid_7.gemfile
+  # - gemfiles/mongoid_8.gemfile
 services:
   - mongodb
 sudo: false

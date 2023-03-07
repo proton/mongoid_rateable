@@ -7,7 +7,7 @@ require 'rubygems'
 require 'mongoid'
 require 'mongoid_rateable'
 require 'simplecov'
-require 'database_cleaner'
+require 'database_cleaner/mongoid'
 require 'coveralls'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
@@ -28,18 +28,16 @@ end
 
 Dir["#{MODELS}/*.rb"].each { |f| require f }
 
-DatabaseCleaner.orm = "mongoid"
-
 RSpec.configure do |config|
   config.before(:all) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner[:mongoid].strategy = :deletion
   end
 
   config.before(:each) do
-    DatabaseCleaner.start
+    DatabaseCleaner[:mongoid].start
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
+    DatabaseCleaner[:mongoid].clean
   end
 end
