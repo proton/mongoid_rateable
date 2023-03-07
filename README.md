@@ -1,30 +1,34 @@
-= Mongoid::Rateable
+# Mongoid::Rateable
 
-Provides fields and methods for the *rating* manipulation on Mongoid documents
+Provides fields and methods for the **rating** manipulation on Mongoid
+documents
 
-{<img src="https://secure.travis-ci.org/proton/mongoid_rateable.png" />}[http://travis-ci.org/proton/mongoid_rateable]
+[![travis CI](https://secure.travis-ci.org/proton/mongoid_rateable.png)](http://travis-ci.org/proton/mongoid_rateable)
 
 Lastest version of Mongoid:Rateable requires mongoid 3, 4, 5, 6 and 7.
 
 If you need a mongoid 2 support, look at mongoid_rateable 0.1.7.
 
-== Support us
+## Support us
 
+[<img src="http://api.flattr.com/button/flattr-badge-large.png"
+/>](https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proto
+n/mongoid_rateable/&title=MongoidRateable&language=&tags=github&category=softw
+are) or https://www.patreon.com/_proton
 
-{<img src="http://api.flattr.com/button/flattr-badge-large.png" />}[https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/mongoid_rateable/&title=MongoidRateable&language=&tags=github&category=software] or https://www.patreon.com/_proton
-
-== Installation
+## Installation
 
 Add to Gemfile:
 
     gem 'mongoid_rateable'
 
-== Getting Started
-
+## Getting Started
 
 Simply use the `rateable` macro from any class that is a Mongoid Document.
 
-This macro will include `Mongoid::Rateable` into the class and configure the rating functionality using the options hash. For any option not present, the default option value will be used.
+This macro will include `Mongoid::Rateable` into the class and configure the
+rating functionality using the options hash. For any option not present, the
+default option value will be used.
 
     class Post
       include Mongoid::Document
@@ -57,9 +61,10 @@ You can also set the `default_rater`
       end
     end
 
-Note: For even more control over the configuration, see the `ClassMethods` module code in `rateable.rb`.
+Note: For even more control over the configuration, see the `ClassMethods`
+module code in `rateable.rb`.
 
-== Cast Rates
+## Cast Rates
 
 You can rate by passing an integer and a rater model to the "rate" method:
 
@@ -92,7 +97,7 @@ Sure, you can rate and save in one function:
     @post.rate_and_save(3, @user)
     @post.unrate_and_save(@user)
 
-== Additional Functionality
+## Additional Functionality
 
 You'll often want to know if a user already rated post.  Simple:
 
@@ -122,7 +127,8 @@ And you can get the average rating:
 
     @post.rating            # rates / rate_weight
 
-And you can get the average rating without weights (It calculates realtime, so it can be slow):
+And you can get the average rating without weights (It calculates realtime, so
+it can be slow):
 
     @post.unweighted_rating # rates without weights / rate_count
 
@@ -131,7 +137,7 @@ And you can get the previous rating and delta:
     @post.previous_rating
     @post.rating_delta      # rating - previous_rating
 
-== Scopes
+## Scopes
 
 You can get rated or unrated posts:
 
@@ -148,23 +154,29 @@ You can get posts with some rating:
     Post.with_rating(0..10)
     Post.with_rating(-2..2)
 
-You can get most rated and highest rated posts:
-(Sorry, this method doesn't work with embedded documents)
+You can get most rated and highest rated posts: (Sorry, this method doesn't
+work with embedded documents)
 
     Post.highest_rated      # 10 (or less) highest rated posts
     Post.highest_rated(5)   # 5 (or less) highest rated posts
 
-== Contributing to Mongoid::Rateable
+## Contributing to Mongoid::Rateable
 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+*   Check out the latest master to make sure the feature hasn't been
+    implemented or the bug hasn't been fixed yet
+*   Check out the issue tracker to make sure someone already hasn't requested
+    it and/or contributed it
+*   Fork the project
+*   Start a feature/bugfix branch
+*   Commit and push until you are happy with your contribution
+*   Make sure to add tests for it. This is important so I don't break it in a
+    future version unintentionally.
+*   Please try not to mess with the Rakefile, version, or history. If you want
+    to have your own version, or is otherwise necessary, that is fine, but
+    please isolate to its own commit so I can cherry-pick around it.
 
-== Copyright
 
-Copyright (c) 2011 Peter Savichev (proton). See LICENSE.txt for
-further details.
+## Copyright
+
+Copyright (c) 2011 Peter Savichev (proton). See LICENSE.txt for further
+details.
